@@ -16,3 +16,4 @@ export 'package:url_launcher/url_launcher.dart';
 export 'package:flutter_mobx/flutter_mobx.dart';
 export 'package:go_router/go_router.dart';
 export 'package:provider/provider.dart';
+export 'package:crypto/crypto.dart';

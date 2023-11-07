@@ -80,6 +80,16 @@ class Languages {
     );
   }
 
+  /// `Cadastrar`
+  String get signUp {
+    return Intl.message(
+      'Cadastrar',
+      name: 'signUp',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Política de Privacidade`
   String get privacyPolicy {
     return Intl.message(
@@ -125,6 +135,26 @@ class Languages {
     return Intl.message(
       'A senha deve conter mais de um caractere.',
       name: 'validatorPassMin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Usuario ou senha inválidos.`
+  String get invalidUserOrPass {
+    return Intl.message(
+      'Usuario ou senha inválidos.',
+      name: 'invalidUserOrPass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Erro na autenticação.`
+  String get errorAuthentication {
+    return Intl.message(
+      'Erro na autenticação.',
+      name: 'errorAuthentication',
       desc: '',
       args: [],
     );

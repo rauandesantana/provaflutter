@@ -3,9 +3,12 @@
   "error" : "Erro",
   "tryAgain" : "Tente Novamente",
   "signIn" : "Entrar",
+  "signUp" : "Cadastrar",
   "privacyPolicy" : "Política de Privacidade",
   "user" : "Usuário",
   "password" : "Senha",
   "validatorIsEmpty" : "Campo obrigatório.",
-  "validatorPassMin" : "A senha deve conter mais de um caractere."
+  "validatorPassMin" : "A senha deve conter mais de um caractere.",
+  "invalidUserOrPass" : "Usuario ou senha inválidos.",
+  "errorAuthentication" : "Erro na autenticação."
 }
