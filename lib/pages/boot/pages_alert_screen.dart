@@ -25,6 +25,7 @@ class $PagesAlertScreen extends StatelessWidget {
                 child: Stack(
                   alignment: AlignmentDirectional.center,
                   children: [
+                    // --------------------------------------------------------- Flutter Logo Image
                     Positioned(
                       child: Container(
                         padding: const EdgeInsets.all(40),
@@ -36,6 +37,7 @@ class $PagesAlertScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                    // --------------------------------------------------------- Error Title
                     Positioned(
                       left: 30,
                       bottom: 35,
@@ -51,6 +53,7 @@ class $PagesAlertScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              // --------------------------------------------------------------- Try Again Button
               ElevatedButton(
                 style: ButtonStyle(
                   foregroundColor: MaterialStatePropertyAll(foregroundColor),

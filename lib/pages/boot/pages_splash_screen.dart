@@ -12,11 +12,13 @@ class _$PagesSplashScreenState extends State<$PagesSplashScreen>
   final _color = Colors.teal.shade300;
   final double _size = 180;
 
+  // --------------------------------------------------------------------------- Animation Controller
   late final AnimationController _controller = AnimationController(
     duration: const Duration(seconds: 2),
     vsync: this,
   )..repeat(reverse: true);
 
+  // --------------------------------------------------------------------------- Animation
   late final Animation<double> _animation = CurvedAnimation(
     parent: _controller,
     curve: Curves.elasticOut,
@@ -54,6 +56,7 @@ class _$PagesSplashScreenState extends State<$PagesSplashScreen>
           child: Stack(
             alignment: AlignmentDirectional.center,
             children: [
+              // --------------------------------------------------------------- Progress Indicator
               Positioned(
                 width: _size,
                 height: _size,
@@ -61,6 +64,7 @@ class _$PagesSplashScreenState extends State<$PagesSplashScreen>
                   color: _color,
                 ),
               ),
+              // --------------------------------------------------------------- Flutter Logo Image
               Positioned(
                 width: _size,
                 height: _size,

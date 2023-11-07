@@ -55,35 +55,34 @@ class _$PagesLoginState extends State<$PagesLogin> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 15),
-                          child: Components.textFormField(
-                            title: Languages.current.user,
-                            prefixIcon: Assets.icons.userRounded,
-                            prefixSizeIcon: 14,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(20),
-                              FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                            ],
-                            validator: _validatorUser,
-                          ),
+                        // ----------------------------------------------------- User Field
+                        Components.textFormField(
+                          title: Languages.current.user,
+                          prefixIcon: Assets.icons.userRounded,
+                          prefixSizeIcon: 14,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(20),
+                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                          ],
+                          validator: _validatorUser,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 25),
-                          child: Components.textFormField(
-                            title: Languages.current.password,
-                            prefixIcon: Assets.icons.lockRounded,
-                            prefixSizeIcon: 18,
-                            obscureText: true,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(20),
-                              FilteringTextInputFormatter.allow(
-                                RegExp(r'[a-zA-Z0-9]'),
-                              ),
-                            ],
-                            validator: _validatorPass,
-                          ),
+                        const Padding(padding: EdgeInsets.only(bottom: 15)),
+                        // ----------------------------------------------------- Password Field
+                        Components.textFormField(
+                          title: Languages.current.password,
+                          prefixIcon: Assets.icons.lockRounded,
+                          prefixSizeIcon: 18,
+                          obscureText: true,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(20),
+                            FilteringTextInputFormatter.allow(
+                              RegExp(r'[a-zA-Z0-9]'),
+                            ),
+                          ],
+                          validator: _validatorPass,
                         ),
+                        const Padding(padding: EdgeInsets.only(bottom: 25)),
+                        // ----------------------------------------------------- Sign In Button
                         ElevatedButton(
                           onPressed: _checkButton,
                           child: Text(Languages.current.signIn),
@@ -94,6 +93,7 @@ class _$PagesLoginState extends State<$PagesLogin> {
                 ),
               ),
             ),
+            // ----------------------------------------------------------------- Privacy Policy Button
             Padding(
               padding: const EdgeInsets.only(bottom: 35),
               child: GestureDetector(
