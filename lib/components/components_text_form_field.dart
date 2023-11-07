@@ -44,7 +44,7 @@ class $ComponentsTextFormField extends StatelessWidget {
           obscureText: obscureText ?? false,
           inputFormatters: inputFormatters,
           textInputAction: textInputAction,
-          keyboardType: keyboardType,
+          keyboardType: keyboardType ?? TextInputType.text,
           validator: validator,
           decoration: InputDecoration(
             hintText: hintText,
