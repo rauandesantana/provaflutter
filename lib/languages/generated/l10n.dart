@@ -150,11 +150,31 @@ class Languages {
     );
   }
 
+  /// `Usuário inválido.`
+  String get invalidUser {
+    return Intl.message(
+      'Usuário inválido.',
+      name: 'invalidUser',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Erro na autenticação.`
   String get errorAuthentication {
     return Intl.message(
       'Erro na autenticação.',
       name: 'errorAuthentication',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `O Usuário foi criado com sucesso.`
+  String get userCreatedSuccessfully {
+    return Intl.message(
+      'O Usuário foi criado com sucesso.',
+      name: 'userCreatedSuccessfully',
       desc: '',
       args: [],
     );

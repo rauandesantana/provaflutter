@@ -10,5 +10,7 @@
   "validatorIsEmpty" : "Required field.",
   "validatorPassMin" : "The password must contain more than one character.",
   "invalidUserOrPass" : "Invalid user or password.",
-  "errorAuthentication" : "Authentication error."
+  "invalidUser" : "Invalid user.",
+  "errorAuthentication" : "Authentication error.",
+  "userCreatedSuccessfully" : "The User was created successfully."
 }

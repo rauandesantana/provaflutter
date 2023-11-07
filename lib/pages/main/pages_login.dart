@@ -19,14 +19,14 @@ class _$PagesLoginState extends State<$PagesLogin> {
   void _checkButton() {
     final validate = _formKey.currentState?.validate();
     if (validate == true) {
+      final username = _userControler.text;
+      final password = sha512.convert(utf8.encode(_passControler.text));
+
       if (_isSignIn) {
         // --------------------------------------------------------------------- Sign In
         final appState = context.read<ProvidersAppState>();
-        final username = _userControler.text;
-        final password = sha512.convert(utf8.encode(_passControler.text));
-
         Services.mockAPI
-            .signIn(username: username, password: password.toString())
+            .signIn(username: username, password: password)
             .then((result) {
           if (result == null) {
             _showSnackBar(Languages.current.errorAuthentication);
@@ -37,7 +37,21 @@ class _$PagesLoginState extends State<$PagesLogin> {
         });
       } else {
         // --------------------------------------------------------------------- Sign Up
-
+        Services.mockAPI
+            .signUp(username: username, password: password)
+            .then((result) {
+          if (result == true) {
+            _userControler.clear();
+            _passControler.clear();
+            _showSnackBar(
+              Languages.current.userCreatedSuccessfully,
+              color: Theme.of(context).colorScheme.secondary,
+            );
+            setState(() => _isSignIn = true);
+          } else {
+            _showSnackBar(Languages.current.invalidUser);
+          }
+        });
       }
     }
   }
@@ -63,10 +77,10 @@ class _$PagesLoginState extends State<$PagesLogin> {
   }
 
   // --------------------------------------------------------------------------- Show SnackBar
-  void _showSnackBar(String text) {
+  void _showSnackBar(String text, {Color? color}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: Theme.of(context).colorScheme.error,
+        backgroundColor: color ?? Theme.of(context).colorScheme.error,
         content: Text(
           text,
           style: TextStyle(

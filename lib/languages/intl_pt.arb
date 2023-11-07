@@ -10,5 +10,7 @@
   "validatorIsEmpty" : "Campo obrigatório.",
   "validatorPassMin" : "A senha deve conter mais de um caractere.",
   "invalidUserOrPass" : "Usuario ou senha inválidos.",
-  "errorAuthentication" : "Erro na autenticação."
+  "invalidUser" : "Usuário inválido.",
+  "errorAuthentication" : "Erro na autenticação.",
+  "userCreatedSuccessfully" : "O Usuário foi criado com sucesso."
 }

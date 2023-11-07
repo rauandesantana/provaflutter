@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "errorAuthentication":
             MessageLookupByLibrary.simpleMessage("Authentication error."),
+        "invalidUser": MessageLookupByLibrary.simpleMessage("Invalid user."),
         "invalidUserOrPass":
             MessageLookupByLibrary.simpleMessage("Invalid user or password."),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
@@ -33,6 +34,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "tryAgain": MessageLookupByLibrary.simpleMessage("Try Again"),
         "user": MessageLookupByLibrary.simpleMessage("User"),
+        "userCreatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "The User was created successfully."),
         "validatorIsEmpty":
             MessageLookupByLibrary.simpleMessage("Required field."),
         "validatorPassMin": MessageLookupByLibrary.simpleMessage(
