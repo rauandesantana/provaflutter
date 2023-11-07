@@ -1,5 +1,6 @@
 export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:flutter_web_plugins/url_strategy.dart';
+export 'package:flutter/services.dart';
 export 'package:flutter/material.dart';
 // ============================================================================= Exports Lib
 export 'package:provaflutter/assets/assets.dart';

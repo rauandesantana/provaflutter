@@ -31,10 +31,26 @@ class ProvaFlutter extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: colorScheme,
+        textTheme: TextTheme(
+          bodyMedium: TextStyle(color: colorScheme.onSurface),
+          bodyLarge: TextStyle(color: colorScheme.tertiary),
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             foregroundColor: MaterialStatePropertyAll(colorScheme.onSurface),
             minimumSize: const MaterialStatePropertyAll(Size(130, 38)),
+          ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          isDense: true,
+          filled: true,
+          fillColor: colorScheme.onSurface,
+          contentPadding:  const EdgeInsets.all(7),
+          prefixIconColor: colorScheme.tertiary,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6),
+            borderSide: BorderSide.none,
+            gapPadding: 0,
           ),
         ),
       ),
@@ -49,6 +65,7 @@ final colorScheme = ColorScheme(
   onPrimary: Colors.blueGrey.shade50,
   secondary: const Color(0xFF1B4F67),
   onSecondary: Colors.blueGrey.shade50,
+  tertiary: Colors.black,
   error: const Color(0xFFD73131),
   onError: const Color(0xFF980505),
   background: const Color(0xFF1B4F67),
