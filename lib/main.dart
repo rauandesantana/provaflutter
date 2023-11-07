@@ -3,7 +3,12 @@ import 'package:provaflutter/import_collections.dart';
 void main() {
   usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const ProvaFlutter());
+  runApp(
+    MultiProvider(
+      providers: providers,
+      child: const ProvaFlutter(),
+    ),
+  );
 }
 
 class ProvaFlutter extends StatelessWidget {

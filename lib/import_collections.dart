@@ -4,6 +4,7 @@ export 'package:flutter/material.dart';
 // ============================================================================= Exports Lib
 export 'package:provaflutter/assets/assets.dart';
 export 'package:provaflutter/pages/pages.dart';
+export 'package:provaflutter/providers/providers.dart';
 // ============================================================================= Constants
 export 'package:provaflutter/constants/pages_tags.dart';
 // ============================================================================= Packages

@@ -1,10 +1,12 @@
 import 'package:provaflutter/import_collections.dart';
+import 'package:provaflutter/providers/providers_app_state.dart';
 
 class $PagesAlertScreen extends StatelessWidget {
   const $PagesAlertScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final appState = context.read<ProvidersAppState>();
     const double size = 180;
 
     return Scaffold(
@@ -57,11 +59,7 @@ class $PagesAlertScreen extends StatelessWidget {
                     Colors.red.shade700,
                   )
                 ),
-                onPressed: () {
-
-                  // ----------------------------------------------------------- Function Try Again
-
-                },
+                onPressed: () => appState.restart(),
                 child: Text(
                   Languages.current.tryAgain,
                   style: const TextStyle(

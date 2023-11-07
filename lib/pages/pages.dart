@@ -3,6 +3,7 @@ import 'package:provaflutter/pages/boot/pages_alert_screen.dart';
 import 'package:provaflutter/pages/boot/pages_splash_screen.dart';
 import 'package:provaflutter/pages/main/pages_home.dart';
 import 'package:provaflutter/pages/main/pages_login.dart';
+import 'package:provaflutter/providers/providers_app_state.dart';
 
 // ============================================================================= Pages
 class Pages {
@@ -114,12 +115,37 @@ class $PagesMain {
 
 // ----------------------------------------------------------------------------- GoRouter
 final goRouter = GoRouter(
-    refreshListenable: null,
+    refreshListenable: providersAppState,
     routes: Pages._pagesList.map((page) => page.route).toList(),
     redirect: (context, state) {
+      final appState = context.read<ProvidersAppState>();
       final currentPage = Pages.findByPath(state.matchedLocation);
+      final isAuthPage = currentPage.containTags([PagesTags.auth]);
+      final isPrivatePage = currentPage.containTags([PagesTags.private]);
+      final init = appState.isInitialized;
+      final auth = appState.isAuthenticated;
+      final alert = appState.alert;
 
-      print(currentPage.name);
-
-      return null;
+      // ----------------------------------------------------------------------- Not Initialized
+      if (init == false && alert == false) {
+        return Pages.boot.splashScreen.path;
+      } else {
+        // --------------------------------------------------------------------- Alert
+        if (alert == true) {
+          return Pages.boot.alertScreen.path;
+        } else {
+          // ------------------------------------------------------------------- Not Authenticated
+          if (auth == false && isAuthPage == false) {
+            return Pages.main.login.path;
+          }
+          // ------------------------------------------------------------------- Authenticated
+          else if (auth == true && isPrivatePage == false) {
+            return Pages.main.home.path;
+          }
+          // ------------------------------------------------------------------- Another
+          else {
+            return null;
+          }
+        }
+      }
     });
