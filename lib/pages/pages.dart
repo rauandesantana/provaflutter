@@ -3,7 +3,6 @@ import 'package:provaflutter/pages/boot/pages_alert_screen.dart';
 import 'package:provaflutter/pages/boot/pages_splash_screen.dart';
 import 'package:provaflutter/pages/main/pages_home.dart';
 import 'package:provaflutter/pages/main/pages_login.dart';
-import 'package:provaflutter/providers/providers_app_state.dart';
 
 // ============================================================================= Pages
 class Pages {
