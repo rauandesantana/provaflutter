@@ -8,13 +8,35 @@ class $PagesLogin extends StatefulWidget {
 }
 
 class _$PagesLoginState extends State<$PagesLogin> {
+  final String _urlPrivacyPolicy = "https://google.com.br";
   final _formKey = GlobalKey<FormState>();
 
-  void checkButton() {
+  // --------------------------------------------------------------------------- Check Button
+  void _checkButton() {
     final validate = _formKey.currentState?.validate();
     if (validate == true) {
       final appState = context.read<ProvidersAppState>();
       appState.setAuthentication(true);
+    }
+  }
+
+  // --------------------------------------------------------------------------- Validator User
+  String? _validatorUser(String? text) {
+    if (text == null || text.isEmpty) {
+      return Languages.current.validatorIsEmpty;
+    } else {
+      return null;
+    }
+  }
+
+  // --------------------------------------------------------------------------- Validator Password
+  String? _validatorPass(String? text) {
+    if (text == null || text.isEmpty) {
+      return Languages.current.validatorIsEmpty;
+    } else if (text.length < 2) {
+      return Languages.current.validatorPassMin;
+    } else {
+      return null;
     }
   }
 
@@ -43,13 +65,7 @@ class _$PagesLoginState extends State<$PagesLogin> {
                               LengthLimitingTextInputFormatter(20),
                               FilteringTextInputFormatter.deny(RegExp(r'\s')),
                             ],
-                            validator: (text) {
-                              if (text == null || text.isEmpty) {
-                                return Languages.current.validatorIsEmpty;
-                              } else {
-                                return null;
-                              }
-                            },
+                            validator: _validatorUser,
                           ),
                         ),
                         Padding(
@@ -65,19 +81,11 @@ class _$PagesLoginState extends State<$PagesLogin> {
                                 RegExp(r'[a-zA-Z0-9]'),
                               ),
                             ],
-                            validator: (text) {
-                              if (text == null || text.isEmpty) {
-                                return Languages.current.validatorIsEmpty;
-                              } else if (text.length < 2) {
-                                return Languages.current.validatorPassMin;
-                              } else {
-                                return null;
-                              }
-                            },
+                            validator: _validatorPass,
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: checkButton,
+                          onPressed: _checkButton,
                           child: Text(Languages.current.signIn),
                         ),
                       ],
@@ -89,12 +97,7 @@ class _$PagesLoginState extends State<$PagesLogin> {
             Padding(
               padding: const EdgeInsets.only(bottom: 35),
               child: GestureDetector(
-                onTap: () async {
-                  final url = Uri.parse("https://google.com.br");
-                  if (await canLaunchUrl(url)) {
-                    await launchUrl(url);
-                  }
-                },
+                onTap: () => Services.launcherUrl.open(_urlPrivacyPolicy),
                 child: Text(Languages.current.privacyPolicy),
               ),
             ),
