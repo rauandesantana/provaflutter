@@ -69,6 +69,16 @@ class Languages {
       args: [],
     );
   }
+
+  /// `Entrar`
+  String get signIn {
+    return Intl.message(
+      'Entrar',
+      name: 'signIn',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Languages> {

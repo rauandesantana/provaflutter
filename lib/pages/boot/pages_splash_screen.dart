@@ -8,7 +8,9 @@ class $PagesSplashScreen extends StatefulWidget {
   State<$PagesSplashScreen> createState() => _$PagesSplashScreenState();
 }
 
-class _$PagesSplashScreenState extends State<$PagesSplashScreen> with TickerProviderStateMixin {
+class _$PagesSplashScreenState extends State<$PagesSplashScreen>
+    with TickerProviderStateMixin {
+  final _color = Colors.teal.shade300;
   final double _size = 180;
 
   late final AnimationController _controller = AnimationController(
@@ -38,7 +40,7 @@ class _$PagesSplashScreenState extends State<$PagesSplashScreen> with TickerProv
         Future.delayed(const Duration(seconds: 2), () => "firebase"),
         Future.delayed(const Duration(seconds: 1), () => "another"),
         // Para Testar o Alerta de Erro ao Carregar
-        // Future.delayed(const Duration(seconds: 3), () => throw "errorAlertTest"),
+        // Future.delayed(const Duration(seconds: 3), () => throw "errorAlert"),
       ]);
     } else {
       appState.restart();
@@ -48,7 +50,7 @@ class _$PagesSplashScreenState extends State<$PagesSplashScreen> with TickerProv
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: Components.bodyGradient(
         child: Center(
           child: Stack(
             alignment: AlignmentDirectional.center,
@@ -56,7 +58,9 @@ class _$PagesSplashScreenState extends State<$PagesSplashScreen> with TickerProv
               Positioned(
                 width: _size,
                 height: _size,
-                child: const CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: _color,
+                ),
               ),
               Positioned(
                 width: _size,
@@ -67,7 +71,7 @@ class _$PagesSplashScreenState extends State<$PagesSplashScreen> with TickerProv
                     turns: _animation,
                     child: Image.asset(
                       Assets.images.logos.flutter,
-                      color: Theme.of(context).colorScheme.primary,
+                      color: _color,
                     ),
                   ),
                 ),

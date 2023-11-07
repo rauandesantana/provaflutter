@@ -7,10 +7,15 @@ class $PagesAlertScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.read<ProvidersAppState>();
+    final foregroundColor = Theme.of(context).colorScheme.onError;
+    final overlayColor = Colors.red.shade300;
+    final color = Colors.red.shade200;
     const double size = 180;
 
     return Scaffold(
-      body: SafeArea(
+      body: Components.bodyGradient(
+        startColor: Theme.of(context).colorScheme.onError,
+        endColor: Theme.of(context).colorScheme.error,
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -28,7 +33,7 @@ class $PagesAlertScreen extends StatelessWidget {
                         height: size,
                         child: Image.asset(
                           Assets.images.logos.flutter,
-                          color: Theme.of(context).colorScheme.error,
+                          color: color,
                         ),
                       ),
                     ),
@@ -40,7 +45,7 @@ class $PagesAlertScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.error,
+                          color: color,
                         ),
                       ),
                     ),
@@ -49,23 +54,12 @@ class $PagesAlertScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 style: ButtonStyle(
-                  foregroundColor: MaterialStatePropertyAll(
-                    Theme.of(context).scaffoldBackgroundColor,
-                  ),
-                  backgroundColor: MaterialStatePropertyAll(
-                    Theme.of(context).colorScheme.error,
-                  ),
-                  overlayColor: MaterialStatePropertyAll(
-                    Colors.red.shade700,
-                  )
+                  foregroundColor: MaterialStatePropertyAll(foregroundColor),
+                  overlayColor: MaterialStatePropertyAll(overlayColor),
+                  backgroundColor: MaterialStatePropertyAll(color),
                 ),
                 onPressed: () => appState.restart(),
-                child: Text(
-                  Languages.current.tryAgain,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                child: Text(Languages.current.tryAgain),
               ),
             ],
           ),

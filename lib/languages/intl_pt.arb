@@ -1,5 +1,6 @@
 {
   "@@locale": "pt",
   "error" : "Erro",
-  "tryAgain" : "Tente Novamente"
+  "tryAgain" : "Tente Novamente",
+  "signIn" : "Entrar"
 }
