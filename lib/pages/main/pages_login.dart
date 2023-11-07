@@ -60,11 +60,11 @@ class _$PagesLoginState extends State<$PagesLogin> {
                           title: Languages.current.user,
                           prefixIcon: Assets.icons.userRounded,
                           prefixSizeIcon: 14,
+                          validator: _validatorUser,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(20),
                             FilteringTextInputFormatter.deny(RegExp(r'\s')),
                           ],
-                          validator: _validatorUser,
                         ),
                         const Padding(padding: EdgeInsets.only(bottom: 15)),
                         // ----------------------------------------------------- Password Field
@@ -73,13 +73,13 @@ class _$PagesLoginState extends State<$PagesLogin> {
                           prefixIcon: Assets.icons.lockRounded,
                           prefixSizeIcon: 18,
                           obscureText: true,
+                          validator: _validatorPass,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(20),
                             FilteringTextInputFormatter.allow(
                               RegExp(r'[a-zA-Z0-9]'),
                             ),
                           ],
-                          validator: _validatorPass,
                         ),
                         const Padding(padding: EdgeInsets.only(bottom: 25)),
                         // ----------------------------------------------------- Sign In Button
