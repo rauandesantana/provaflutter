@@ -79,6 +79,56 @@ class Languages {
       args: [],
     );
   }
+
+  /// `Política de Privacidade`
+  String get privacyPolicy {
+    return Intl.message(
+      'Política de Privacidade',
+      name: 'privacyPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Usuário`
+  String get user {
+    return Intl.message(
+      'Usuário',
+      name: 'user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Senha`
+  String get password {
+    return Intl.message(
+      'Senha',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Campo obrigatório.`
+  String get validatorIsEmpty {
+    return Intl.message(
+      'Campo obrigatório.',
+      name: 'validatorIsEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A senha deve conter mais de um caractere.`
+  String get validatorPassMin {
+    return Intl.message(
+      'A senha deve conter mais de um caractere.',
+      name: 'validatorPassMin',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Languages> {

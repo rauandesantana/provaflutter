@@ -1,5 +1,4 @@
 import 'package:provaflutter/import_collections.dart';
-import 'package:provaflutter/providers/providers_app_state.dart';
 
 class $PagesSplashScreen extends StatefulWidget {
   const $PagesSplashScreen({super.key});

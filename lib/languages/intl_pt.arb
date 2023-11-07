@@ -2,5 +2,10 @@
   "@@locale": "pt",
   "error" : "Erro",
   "tryAgain" : "Tente Novamente",
-  "signIn" : "Entrar"
+  "signIn" : "Entrar",
+  "privacyPolicy" : "Política de Privacidade",
+  "user" : "Usuário",
+  "password" : "Senha",
+  "validatorIsEmpty" : "Campo obrigatório.",
+  "validatorPassMin" : "A senha deve conter mais de um caractere."
 }

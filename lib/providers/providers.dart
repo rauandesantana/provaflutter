@@ -1,5 +1,5 @@
 import 'package:provaflutter/import_collections.dart';
-import 'package:provaflutter/providers/providers_app_state.dart';
+export 'package:provaflutter/providers/providers_app_state.dart';
 
 // ============================================================================= Providers
 final providers = [

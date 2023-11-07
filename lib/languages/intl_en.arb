@@ -2,5 +2,10 @@
   "@@locale": "en",
   "error" : "Error",
   "tryAgain" : "Try Again",
-  "signIn": "Sign In"
+  "signIn" : "Sign In",
+  "privacyPolicy" : "Privacy Policy",
+  "user" : "User",
+  "password" : "Password",
+  "validatorIsEmpty" : "Required field.",
+  "validatorPassMin" : "The password must contain more than one character."
 }

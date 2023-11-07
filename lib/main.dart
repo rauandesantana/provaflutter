@@ -45,8 +45,13 @@ class ProvaFlutter extends StatelessWidget {
           isDense: true,
           filled: true,
           fillColor: colorScheme.onSurface,
-          contentPadding:  const EdgeInsets.all(7),
+          contentPadding: const EdgeInsets.all(7),
           prefixIconColor: colorScheme.tertiary,
+          hintStyle: TextStyle(
+            color: colorScheme.tertiary,
+            fontWeight: FontWeight.bold,
+          ),
+          errorStyle: const TextStyle(fontWeight: FontWeight.bold),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(6),
             borderSide: BorderSide.none,

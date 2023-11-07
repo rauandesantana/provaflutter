@@ -24,22 +24,26 @@ class Components {
   static Widget textFormField({
     TextEditingController? controller,
     String? title,
+    String? hintText,
     IconData? prefixIcon,
     double? prefixSizeIcon,
     bool? obscureText,
     List<TextInputFormatter>? inputFormatters,
     TextInputAction? textInputAction,
     TextInputType? keyboardType,
+    FormFieldValidator<String>? validator,
   }) {
     return $ComponentsTextFormField(
       controller: controller,
       title: title,
+      hintText: hintText,
       prefixIcon: prefixIcon,
       prefixSizeIcon: prefixSizeIcon,
       obscureText: obscureText,
       inputFormatters: inputFormatters,
       textInputAction: textInputAction,
       keyboardType: keyboardType,
+      validator: validator,
     );
   }
 }

@@ -11,5 +11,7 @@ export 'package:provaflutter/components/components.dart';
 export 'package:provaflutter/constants/pages_tags.dart';
 // ============================================================================= Packages
 export 'package:provaflutter/languages/generated/l10n.dart';
+export 'package:url_launcher/url_launcher.dart';
+export 'package:flutter_mobx/flutter_mobx.dart';
 export 'package:go_router/go_router.dart';
 export 'package:provider/provider.dart';

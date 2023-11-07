@@ -5,22 +5,26 @@ class $ComponentsTextFormField extends StatelessWidget {
     super.key,
     required this.controller,
     required this.title,
+    required this.hintText,
     required this.prefixIcon,
     required this.prefixSizeIcon,
     required this.obscureText,
     required this.inputFormatters,
     required this.textInputAction,
     required this.keyboardType,
+    required this.validator,
   });
 
   final TextEditingController? controller;
   final String? title;
+  final String? hintText;
   final IconData? prefixIcon;
   final double? prefixSizeIcon;
   final bool? obscureText;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
+  final FormFieldValidator<String>? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +45,9 @@ class $ComponentsTextFormField extends StatelessWidget {
           inputFormatters: inputFormatters,
           textInputAction: textInputAction,
           keyboardType: keyboardType,
-
-
+          validator: validator,
           decoration: InputDecoration(
+            hintText: hintText,
             prefixIcon: Padding(
               padding: const EdgeInsets.all(12),
               child: (prefixIcon != null)
