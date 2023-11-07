@@ -49,6 +49,26 @@ class Languages {
   static Languages? maybeOf(BuildContext context) {
     return Localizations.of<Languages>(context, Languages);
   }
+
+  /// `Erro`
+  String get error {
+    return Intl.message(
+      'Erro',
+      name: 'error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tente Novamente`
+  String get tryAgain {
+    return Intl.message(
+      'Tente Novamente',
+      name: 'tryAgain',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Languages> {
