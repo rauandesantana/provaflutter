@@ -68,7 +68,7 @@ abstract class ProvidersHomeStateBase with Store {
       final editTextList = textList;
       editTextList.removeAt(selectedItem!["id"]);
       textList = editTextList;
-
+      _listReindexing();
 
 
       selectedItem = _switchMode(
@@ -87,32 +87,47 @@ abstract class ProvidersHomeStateBase with Store {
   }) {
     Map<String, dynamic>? returnSelectItem;
 
-    final editTextList = textList.map((item) {
-      final itemEditMode = item["editMode"];
-      final itemDeleteMode = item["deleteMode"];
+    final editTextList = textList.map((textItem) {
+      final itemEditMode = textItem["editMode"];
+      final itemDeleteMode = textItem["deleteMode"];
       final noEditMode = ((itemEditMode == false) != (editMode == false));
       final noDeleteMode = ((itemDeleteMode == false) != (deleteMode == false));
       final defaultMode = noEditMode || noDeleteMode;
 
-      if (item["id"] == index && defaultMode) {
-        item.updateAll((key, value) {
+      if (textItem["id"] == index && defaultMode) {
+        textItem.updateAll((key, value) {
           if (key == "editMode") return editMode;
           if (key == "deleteMode") return deleteMode;
           return value;
         });
-        returnSelectItem = item;
+        returnSelectItem = textItem;
       } else {
-        item.updateAll((key, value) {
+        textItem.updateAll((key, value) {
           if (key == "editMode") return false;
           if (key == "deleteMode") return false;
           return value;
         });
       }
 
-      return item;
+      return textItem;
     }).toList();
 
     textList = editTextList;
     return returnSelectItem;
   }
+
+
+  // --------------------------------------------------------------------------- List Reindexing
+  void _listReindexing() {
+    int index = 0;
+
+    final editTextList = textList.map((textItem) {
+      textItem.update("id", (value) => index);
+      index++;
+      return textItem;
+    }).toList();
+
+    textList = editTextList;
+  }
+
 }
