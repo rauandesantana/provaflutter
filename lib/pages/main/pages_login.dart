@@ -153,22 +153,21 @@ class _$PagesLoginState extends State<$PagesLogin> {
                 ),
               ),
             ),
+            const Padding(padding: EdgeInsets.only(bottom: 25)),
             // ----------------------------------------------------------------- Privacy Policy Button
-            Padding(
-              padding: const EdgeInsets.only(bottom: 35),
-              child: GestureDetector(
-                onTap: () => Services.launcherUrl.open(_urlPrivacyPolicy),
-                child: Text(Languages.current.privacyPolicy),
-              ),
+            GestureDetector(
+              onTap: () => Services.launcherUrl.open(_urlPrivacyPolicy),
+              child: Text(Languages.current.privacyPolicy),
             ),
+            const Padding(padding: EdgeInsets.only(bottom: 25)),
           ],
         ),
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 50),
-        // --------------------------------------------------------------------- Toggle Button (Sign In / Sign Up)
         child: Observer(
           builder: (context) {
+            // ----------------------------------------------------------------- Toggle Button (Sign In / Sign Up)
             return FloatingActionButton(
               onPressed: () => _loginState.toggleIsSignIn(),
               child: Icon(
