@@ -11,7 +11,7 @@ class $ComponentsTextList extends StatelessWidget {
 
   final double? width;
   final double? height;
-  final List<String> textList;
+  final List<Map<String, dynamic>> textList;
   final NullableIndexedWidgetBuilder itemBuilder;
 
   @override

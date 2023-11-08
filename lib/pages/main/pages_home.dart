@@ -8,22 +8,18 @@ class $PagesHome extends StatefulWidget {
 }
 
 class _$PagesHomeState extends State<$PagesHome> {
+  late final ProvidersHomeState _homeState;
   final String _urlPrivacyPolicy = "https://google.com.br";
+
+  @override
+  void initState() {
+    super.initState();
+    _homeState = context.read<ProvidersHomeState>();
+  }
 
   @override
   Widget build(BuildContext context) {
     final keyboard = MediaQuery.of(context).viewInsets.bottom != 0;
-    final List<String> textList = ["Rauan", "Rauan2"];
-
-    // ------------------------------------------------------------------------- Edit Action
-    void editAction(int index) {
-
-    }
-
-    // ------------------------------------------------------------------------- Delete Action
-    void deleteAction(int index) {
-
-    }
 
     return Scaffold(
       body: Components.bodyGradient(
@@ -39,18 +35,19 @@ class _$PagesHomeState extends State<$PagesHome> {
                     children: [
                       // ------------------------------------------------------- Text List
                       Components.textList(
-                        textList: textList,
+                        textList: _homeState.textList,
                         itemBuilder: (context, index) {
                           return Observer(
                             builder: (context) {
+                              final textItem = _homeState.textList[index];
                               // ----------------------------------------------- Text Item
                               return Components.textItem(
                                 index: index,
-                                text: textList[index],
-                                editMode: false,
-                                deleteMode: false,
-                                editAction: editAction,
-                                deleteAction: deleteAction,
+                                text: textItem["text"],
+                                editMode: textItem["editMode"],
+                                deleteMode: textItem["deleteMode"],
+                                editAction: _homeState.activeEditMode,
+                                deleteAction: _homeState.activeDeleteMode,
                               );
                             },
                           );
