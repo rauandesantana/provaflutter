@@ -5,6 +5,7 @@ export 'package:provaflutter/providers/providers_app_state.dart';
 // ============================================================================= Providers
 final providers = [
   ChangeNotifierProvider(create: (context) => providersAppState),
+  Provider(create: (context) => providersLoginState),
 ];
 
 // ============================================================================= Providers App State

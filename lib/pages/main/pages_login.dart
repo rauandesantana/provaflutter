@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:provaflutter/import_collections.dart';
+import 'package:provaflutter/providers/providers_login_state.dart';
 
 class $PagesLogin extends StatefulWidget {
   const $PagesLogin({super.key});
@@ -9,11 +10,11 @@ class $PagesLogin extends StatefulWidget {
 }
 
 class _$PagesLoginState extends State<$PagesLogin> {
+  late final ProvidersLoginState _loginState;
   final String _urlPrivacyPolicy = "https://google.com.br";
   final _formKey = GlobalKey<FormState>();
   final _userControler = TextEditingController();
   final _passControler = TextEditingController();
-  final loginState = providersLoginState;
 
   // --------------------------------------------------------------------------- Check Button
   void _checkButton() {
@@ -22,7 +23,7 @@ class _$PagesLoginState extends State<$PagesLogin> {
       final username = _userControler.text;
       final password = sha512.convert(utf8.encode(_passControler.text));
 
-      if (loginState.isSignIn) {
+      if (_loginState.isSignIn) {
         // --------------------------------------------------------------------- Sign In
         final appState = context.read<ProvidersAppState>();
         Services.mockAPI
@@ -47,7 +48,7 @@ class _$PagesLoginState extends State<$PagesLogin> {
               Languages.current.userCreatedSuccessfully,
               color: Theme.of(context).colorScheme.secondary,
             );
-            loginState.setIsSignIn(true);
+            _loginState.setIsSignIn(true);
           } else {
             _showSnackBar(Languages.current.invalidUser);
           }
@@ -90,6 +91,12 @@ class _$PagesLoginState extends State<$PagesLogin> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loginState = context.read<ProvidersLoginState>();
   }
 
   @override
@@ -142,7 +149,7 @@ class _$PagesLoginState extends State<$PagesLogin> {
                           child: Observer(
                             builder: (context) {
                               return Text(
-                                (loginState.isSignIn)
+                                (_loginState.isSignIn)
                                     ? Languages.current.signIn
                                     : Languages.current.signUp,
                               );
@@ -172,9 +179,9 @@ class _$PagesLoginState extends State<$PagesLogin> {
         child: Observer(
           builder: (context) {
             return FloatingActionButton(
-              onPressed: () => loginState.toggleIsSignIn(),
+              onPressed: () => _loginState.toggleIsSignIn(),
               child: Icon(
-                (loginState.isSignIn)
+                (_loginState.isSignIn)
                     ? Icons.person_add_rounded
                     : Icons.login_rounded,
               ),
