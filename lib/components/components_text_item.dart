@@ -34,10 +34,10 @@ class $ComponentsTextItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           // ------------------------------------------------------------------- Edit Button
-          GestureDetector(
-            onTap: () => editAction(index),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 10),
+          Padding(
+            padding: const EdgeInsets.only(right: 5),
+            child: GestureDetector(
+              onTap: () => editAction(index),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
@@ -58,10 +58,10 @@ class $ComponentsTextItem extends StatelessWidget {
             ),
           ),
           // ------------------------------------------------------------------- Delete Button
-          GestureDetector(
-            onTap: () => deleteAction(index),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 10),
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: GestureDetector(
+              onTap: () => deleteAction(index),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
