@@ -48,7 +48,6 @@ abstract class ProvidersHomeStateBase with Store {
     );
   }
 
-
   // --------------------------------------------------------------------------- Switch Mode
   void _switchMode({
     required int index,
@@ -56,7 +55,13 @@ abstract class ProvidersHomeStateBase with Store {
     required bool deleteMode,
   }) {
     final editTextList = textList.map((item) {
-      if(item["id"] == index) {
+      final itemEditMode = item["editMode"];
+      final itemDeleteMode = item["deleteMode"];
+      final noEditMode = ((itemEditMode == false) != (editMode == false));
+      final noDeleteMode = ((itemDeleteMode == false) != (deleteMode == false));
+      final defaultMode = noEditMode || noDeleteMode;
+
+      if (item["id"] == index && defaultMode) {
         item.updateAll((key, value) {
           if (key == "editMode") return editMode;
           if (key == "deleteMode") return deleteMode;
@@ -75,5 +80,4 @@ abstract class ProvidersHomeStateBase with Store {
 
     textList = editTextList;
   }
-
 }
