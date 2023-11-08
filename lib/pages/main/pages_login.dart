@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:provaflutter/import_collections.dart';
-import 'package:provaflutter/providers/providers_login_state.dart';
 
 class $PagesLogin extends StatefulWidget {
   const $PagesLogin({super.key});
