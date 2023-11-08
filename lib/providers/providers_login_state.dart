@@ -8,7 +8,7 @@ class ProvidersLoginState = ProvidersLoginStateBase with _$ProvidersLoginState;
 abstract class ProvidersLoginStateBase with Store {
   //////////////////////////////////////////////////////////////////////////////
   @observable
-  bool isSignIn = false;
+  bool isSignIn = true;
   //////////////////////////////////////////////////////////////////////////////
 
   @action
