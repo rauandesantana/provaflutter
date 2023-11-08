@@ -1,5 +1,7 @@
 import 'package:provaflutter/components/components_body_gradient.dart';
 import 'package:provaflutter/components/components_text_form_field.dart';
+import 'package:provaflutter/components/components_text_item.dart';
+import 'package:provaflutter/components/components_text_list.dart';
 import 'package:provaflutter/import_collections.dart';
 
 // ============================================================================= Components
@@ -32,6 +34,7 @@ class Components {
     TextInputAction? textInputAction,
     TextInputType? keyboardType,
     FormFieldValidator<String>? validator,
+    TextAlign? textAlign,
   }) {
     return $ComponentsTextFormField(
       controller: controller,
@@ -44,6 +47,41 @@ class Components {
       textInputAction: textInputAction,
       keyboardType: keyboardType,
       validator: validator,
+      textAlign: textAlign,
+    );
+  }
+
+  // --------------------------------------------------------------------------- Text List
+  static Widget textList({
+    double? width,
+    double? height,
+    required List<String> textList,
+    required NullableIndexedWidgetBuilder itemBuilder,
+  }) {
+    return $ComponentsTextList(
+      width: width,
+      height: height,
+      textList: textList,
+      itemBuilder: itemBuilder,
+    );
+  }
+
+  // --------------------------------------------------------------------------- Text List
+  static Widget textItem({
+    required int index,
+    required String text,
+    required bool editMode,
+    required bool deleteMode,
+    required void Function(int) editAction,
+    required void Function(int) deleteAction,
+  }) {
+    return $ComponentsTextItem(
+      index: index,
+      text: text,
+      editMode: editMode,
+      deleteMode: deleteMode,
+      editAction: editAction,
+      deleteAction: deleteAction,
     );
   }
 }

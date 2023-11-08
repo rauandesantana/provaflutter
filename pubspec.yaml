@@ -23,6 +23,7 @@ dependencies:
   url_launcher: ^6.2.1
   http: ^1.1.0
   crypto: ^3.0.3
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:
@@ -49,3 +50,9 @@ flutter:
     - family: Lock Rounded
       fonts:
         - asset: assets/icons/lock_rounded.ttf
+    - family: Edit Rounded
+      fonts:
+        - asset: assets/icons/edit_rounded.ttf
+    - family: Delete Rounded
+      fonts:
+        - asset: assets/icons/delete_rounded.ttf

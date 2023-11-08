@@ -58,6 +58,13 @@ class ProvaFlutter extends StatelessWidget {
             gapPadding: 0,
           ),
         ),
+        cardTheme: CardTheme(
+          color: colorScheme.onSurface,
+        ),
+        listTileTheme: ListTileThemeData(
+          textColor: colorScheme.tertiary,
+          contentPadding: EdgeInsets.zero,
+        ),
       ),
     );
   }

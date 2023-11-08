@@ -13,6 +13,7 @@ class $ComponentsTextFormField extends StatelessWidget {
     required this.textInputAction,
     required this.keyboardType,
     required this.validator,
+    required this.textAlign,
   });
 
   final TextEditingController? controller;
@@ -25,6 +26,7 @@ class $ComponentsTextFormField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
   final FormFieldValidator<String>? validator;
+  final TextAlign? textAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -46,14 +48,15 @@ class $ComponentsTextFormField extends StatelessWidget {
           textInputAction: textInputAction,
           keyboardType: keyboardType ?? TextInputType.text,
           validator: validator,
+          textAlign: textAlign ?? TextAlign.start,
           decoration: InputDecoration(
             hintText: hintText,
-            prefixIcon: Padding(
-              padding: const EdgeInsets.all(12),
-              child: (prefixIcon != null)
-                  ? Icon(prefixIcon, size: prefixSizeIcon)
-                  : null,
-            ),
+            prefixIcon: (prefixIcon != null)
+                ? Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Icon(prefixIcon, size: prefixSizeIcon),
+                  )
+                : null,
             prefixIconConstraints: const BoxConstraints(
               maxWidth: double.maxFinite,
               maxHeight: double.maxFinite,

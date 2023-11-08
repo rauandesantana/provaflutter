@@ -25,4 +25,20 @@ class $AssetsIcons {
       fontFamily: "Lock Rounded",
     );
   }
+
+
+  // --------------------------------------------------------------------------- Edit Rounded
+  IconData get editRounded {
+    return const IconData(
+      0xe901,
+      fontFamily: "Edit Rounded",
+    );
+  }
+  // --------------------------------------------------------------------------- Delete Rounded
+  IconData get deleteRounded {
+    return const IconData(
+      0xe900,
+      fontFamily: "Delete Rounded",
+    );
+  }
 }
