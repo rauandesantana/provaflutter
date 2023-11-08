@@ -25,11 +25,27 @@ mixin _$ProvidersHomeState on ProvidersHomeStateBase, Store {
     });
   }
 
+  late final _$selectedItemAtom =
+      Atom(name: 'ProvidersHomeStateBase.selectedItem', context: context);
+
+  @override
+  Map<String, dynamic>? get selectedItem {
+    _$selectedItemAtom.reportRead();
+    return super.selectedItem;
+  }
+
+  @override
+  set selectedItem(Map<String, dynamic>? value) {
+    _$selectedItemAtom.reportWrite(value, super.selectedItem, () {
+      super.selectedItem = value;
+    });
+  }
+
   late final _$ProvidersHomeStateBaseActionController =
       ActionController(name: 'ProvidersHomeStateBase', context: context);
 
   @override
-  void activeEditMode(int index) {
+  Map<String, dynamic>? activeEditMode(int index) {
     final _$actionInfo = _$ProvidersHomeStateBaseActionController.startAction(
         name: 'ProvidersHomeStateBase.activeEditMode');
     try {
@@ -40,7 +56,7 @@ mixin _$ProvidersHomeState on ProvidersHomeStateBase, Store {
   }
 
   @override
-  void activeDeleteMode(int index) {
+  Map<String, dynamic>? activeDeleteMode(int index) {
     final _$actionInfo = _$ProvidersHomeStateBaseActionController.startAction(
         name: 'ProvidersHomeStateBase.activeDeleteMode');
     try {
@@ -51,9 +67,32 @@ mixin _$ProvidersHomeState on ProvidersHomeStateBase, Store {
   }
 
   @override
+  void editItem() {
+    final _$actionInfo = _$ProvidersHomeStateBaseActionController.startAction(
+        name: 'ProvidersHomeStateBase.editItem');
+    try {
+      return super.editItem();
+    } finally {
+      _$ProvidersHomeStateBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void deleteItem() {
+    final _$actionInfo = _$ProvidersHomeStateBaseActionController.startAction(
+        name: 'ProvidersHomeStateBase.deleteItem');
+    try {
+      return super.deleteItem();
+    } finally {
+      _$ProvidersHomeStateBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-textList: ${textList}
+textList: ${textList},
+selectedItem: ${selectedItem}
     ''';
   }
 }

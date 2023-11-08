@@ -10,6 +10,39 @@ class $PagesHome extends StatefulWidget {
 class _$PagesHomeState extends State<$PagesHome> {
   late final ProvidersHomeState _homeState;
   final String _urlPrivacyPolicy = "https://google.com.br";
+  final _textController = TextEditingController();
+
+  // --------------------------------------------------------------------------- Edit Action
+  void _editAction(int index) {
+    final textItem = _homeState.activeEditMode(index);
+
+    if (textItem != null) {
+      _textController.text = textItem["text"];
+    } else {
+      _textController.clear();
+    }
+  }
+
+  // --------------------------------------------------------------------------- Delete Action
+  void _deleteAction(int index) {
+    _textController.clear();
+    final textItem = _homeState.activeDeleteMode(index);
+    if (textItem != null) {
+
+
+
+      Future.delayed(const Duration(milliseconds: 1000), () {
+
+
+        _homeState.deleteItem();
+
+
+      });
+
+
+
+    }
+  }
 
   @override
   void initState() {
@@ -34,11 +67,11 @@ class _$PagesHomeState extends State<$PagesHome> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       // ------------------------------------------------------- Text List
-                      Components.textList(
-                        textList: _homeState.textList,
-                        itemBuilder: (context, index) {
-                          return Observer(
-                            builder: (context) {
+                      Observer(
+                        builder: (context) {
+                          return Components.textList(
+                            textList: _homeState.textList,
+                            itemBuilder: (context, index) {
                               final textItem = _homeState.textList[index];
                               // ----------------------------------------------- Text Item
                               return Components.textItem(
@@ -46,17 +79,28 @@ class _$PagesHomeState extends State<$PagesHome> {
                                 text: textItem["text"],
                                 editMode: textItem["editMode"],
                                 deleteMode: textItem["deleteMode"],
-                                editAction: _homeState.activeEditMode,
-                                deleteAction: _homeState.activeDeleteMode,
+                                editAction: _editAction,
+                                deleteAction: _deleteAction,
                               );
                             },
                           );
                         },
                       ),
                       // ------------------------------------------------------- Text Field
-                      Components.textFormField(
-                        hintText: "Digite seu texto",
-                        textAlign: TextAlign.center,
+                      Observer(
+                        builder: (context) {
+                          final selectItem = _homeState.selectedItem;
+
+                          return Components.textFormField(
+                            controller: _textController,
+                            hintText: "Digite seu texto",
+                            textAlign: TextAlign.center,
+                            prefixSizeIcon: 14,
+                            prefixIcon: (selectItem?["editMode"] == true)
+                                ? Icons.edit_rounded
+                                : null,
+                          );
+                        },
                       ),
                     ],
                   ),

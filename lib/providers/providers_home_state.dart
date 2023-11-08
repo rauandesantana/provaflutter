@@ -28,32 +28,65 @@ abstract class ProvidersHomeStateBase with Store {
       "deleteMode": false,
     }
   ];
+
+  @observable
+  Map<String, dynamic>? selectedItem;
   //////////////////////////////////////////////////////////////////////////////
 
   @action
-  void activeEditMode(int index) {
-    _switchMode(
+  Map<String, dynamic>? activeEditMode(int index) {
+    selectedItem = _switchMode(
       index: index,
       editMode: true,
+      deleteMode: false,
+    );
+    return selectedItem;
+  }
+
+  @action
+  Map<String, dynamic>? activeDeleteMode(int index) {
+    selectedItem = _switchMode(
+      index: index,
+      editMode: false,
+      deleteMode: true,
+    );
+    return selectedItem;
+  }
+
+  @action
+  void editItem() {
+    selectedItem = _switchMode(
+      index: null,
+      editMode: false,
       deleteMode: false,
     );
   }
 
   @action
-  void activeDeleteMode(int index) {
-    _switchMode(
-      index: index,
-      editMode: false,
-      deleteMode: true,
-    );
+  void deleteItem() {
+    if(selectedItem != null) {
+      final editTextList = textList;
+      editTextList.removeAt(selectedItem!["id"]);
+      textList = editTextList;
+
+
+
+      selectedItem = _switchMode(
+        index: null,
+        editMode: false,
+        deleteMode: false,
+      );
+    }
   }
 
   // --------------------------------------------------------------------------- Switch Mode
-  void _switchMode({
-    required int index,
+  Map<String, dynamic>? _switchMode({
+    required int? index,
     required bool editMode,
     required bool deleteMode,
   }) {
+    Map<String, dynamic>? returnSelectItem;
+
     final editTextList = textList.map((item) {
       final itemEditMode = item["editMode"];
       final itemDeleteMode = item["deleteMode"];
@@ -67,6 +100,7 @@ abstract class ProvidersHomeStateBase with Store {
           if (key == "deleteMode") return deleteMode;
           return value;
         });
+        returnSelectItem = item;
       } else {
         item.updateAll((key, value) {
           if (key == "editMode") return false;
@@ -79,5 +113,6 @@ abstract class ProvidersHomeStateBase with Store {
     }).toList();
 
     textList = editTextList;
+    return returnSelectItem;
   }
 }
