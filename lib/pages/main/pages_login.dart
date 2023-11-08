@@ -13,7 +13,7 @@ class _$PagesLoginState extends State<$PagesLogin> {
   final _formKey = GlobalKey<FormState>();
   final _userControler = TextEditingController();
   final _passControler = TextEditingController();
-  bool _isSignIn = true;
+  final loginState = providersLoginState;
 
   // --------------------------------------------------------------------------- Check Button
   void _checkButton() {
@@ -22,7 +22,7 @@ class _$PagesLoginState extends State<$PagesLogin> {
       final username = _userControler.text;
       final password = sha512.convert(utf8.encode(_passControler.text));
 
-      if (_isSignIn) {
+      if (loginState.isSignIn) {
         // --------------------------------------------------------------------- Sign In
         final appState = context.read<ProvidersAppState>();
         Services.mockAPI
@@ -47,7 +47,7 @@ class _$PagesLoginState extends State<$PagesLogin> {
               Languages.current.userCreatedSuccessfully,
               color: Theme.of(context).colorScheme.secondary,
             );
-            setState(() => _isSignIn = true);
+            loginState.setIsSignIn(true);
           } else {
             _showSnackBar(Languages.current.invalidUser);
           }
@@ -139,10 +139,14 @@ class _$PagesLoginState extends State<$PagesLogin> {
                         // ----------------------------------------------------- Sign In Button
                         ElevatedButton(
                           onPressed: _checkButton,
-                          child: Text(
-                            (_isSignIn)
-                                ? Languages.current.signIn
-                                : Languages.current.signUp,
+                          child: Observer(
+                            builder: (context) {
+                              return Text(
+                                (loginState.isSignIn)
+                                    ? Languages.current.signIn
+                                    : Languages.current.signUp,
+                              );
+                            },
                           ),
                         ),
                       ],
@@ -165,11 +169,17 @@ class _$PagesLoginState extends State<$PagesLogin> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 50),
         // --------------------------------------------------------------------- Toggle Button (Sign In / Sign Up)
-        child: FloatingActionButton(
-          onPressed: () => setState(() => _isSignIn = !_isSignIn),
-          child: Icon(
-            (_isSignIn) ? Icons.person_add_rounded : Icons.login_rounded,
-          ),
+        child: Observer(
+          builder: (context) {
+            return FloatingActionButton(
+              onPressed: () => loginState.toggleIsSignIn(),
+              child: Icon(
+                (loginState.isSignIn)
+                    ? Icons.person_add_rounded
+                    : Icons.login_rounded,
+              ),
+            );
+          },
         ),
       ),
     );
