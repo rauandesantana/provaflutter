@@ -13,10 +13,59 @@ class ProvidersAppState extends ChangeNotifier {
   //////////////////////////////////////////////////////////////////////////////
 
   // --------------------------------------------------------------------------- Set Authentication
-  void setAuthentication(bool value) {
-    if(_isAuthenticated != value) {
-      _isAuthenticated = value;
+  void signOut() {
+    if (_isAuthenticated == true) {
+      _isAuthenticated = false;
       notifyListeners();
+    }
+  }
+
+  // --------------------------------------------------------------------------- Sign In
+  Future<String?> signIn({required String username, required Digest password}) {
+    if (_isAuthenticated == false) {
+      return Services.mockAPI
+          .signIn(username: username, password: password)
+          .then(
+        (result) {
+          if (result == true) {
+            _isAuthenticated = true;
+            notifyListeners();
+            return null;
+          } else if (result == false) {
+            return Languages.current.invalidUserOrPass;
+          } else {
+            return Languages.current.errorAuthentication;
+          }
+        },
+      );
+    } else {
+      return Future(() => null);
+    }
+  }
+
+  // --------------------------------------------------------------------------- Sign Up
+  Future<Object> signUp({required String username, required Digest password}) {
+    if (_isAuthenticated == false) {
+      return Services.mockAPI
+          .signUp(username: username, password: password)
+          .then((result) {
+        if (result == true) {
+          return {
+            "text" : Languages.current.userCreatedSuccessfully,
+            "status" : "success",
+          };
+        } else {
+          return {
+            "text" : Languages.current.invalidUser,
+            "status" : "fail",
+          };
+        }
+      });
+    } else {
+      return Future(() => {
+        "text" : Languages.current.invalidUser,
+        "status" : "fail",
+      });
     }
   }
 

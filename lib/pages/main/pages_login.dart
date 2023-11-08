@@ -20,38 +20,29 @@ class _$PagesLoginState extends State<$PagesLogin> {
   void _checkButton() {
     final validate = _formKey.currentState?.validate();
     if (validate == true) {
+      final appState = context.read<ProvidersAppState>();
       final username = _userControler.text;
       final password = sha512.convert(utf8.encode(_passControler.text));
 
       if (_loginState.isSignIn) {
         // --------------------------------------------------------------------- Sign In
-        final appState = context.read<ProvidersAppState>();
-        Services.mockAPI
-            .signIn(username: username, password: password)
-            .then((result) {
-          if (result == null) {
-            _showSnackBar(Languages.current.errorAuthentication);
-          } else if (result == false) {
-            _showSnackBar(Languages.current.invalidUserOrPass);
-          }
-          appState.setAuthentication(result ?? false);
+        appState.signIn(username: username, password: password).then((text) {
+          if (text != null) _showSnackBar(text);
         });
       } else {
         // --------------------------------------------------------------------- Sign Up
-        Services.mockAPI
-            .signUp(username: username, password: password)
-            .then((result) {
-          if (result == true) {
+        appState.signUp(username: username, password: password).then((object) {
+          final result = object as Map<String, dynamic>;
+          Color? color;
+
+          if (result["status"] == "success") {
             _userControler.clear();
             _passControler.clear();
-            _showSnackBar(
-              Languages.current.userCreatedSuccessfully,
-              color: Theme.of(context).colorScheme.secondary,
-            );
             _loginState.setIsSignIn(true);
-          } else {
-            _showSnackBar(Languages.current.invalidUser);
+            color = Theme.of(context).colorScheme.secondary;
           }
+
+          _showSnackBar(result["text"], color: color);
         });
       }
     }
