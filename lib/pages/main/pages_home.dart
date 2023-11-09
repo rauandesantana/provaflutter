@@ -119,6 +119,7 @@ class _$PagesHomeState extends State<$PagesHome> {
                             prefixIcon: (selectItem?["editMode"] == true)
                                 ? Icons.edit_rounded
                                 : null,
+                            keyboardAction: () {},
                           );
                         },
                       ),
