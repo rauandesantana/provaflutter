@@ -34,38 +34,30 @@ class _$PagesHomeState extends State<$PagesHome> {
     _textController.clear();
     final textItem = _homeState.activeDeleteMode(index);
     if (textItem != null) {
-      showModalBottomSheet(
-        backgroundColor: Theme.of(context).colorScheme.onSurface,
+      Services.messages.showBottomSheet(
         context: context,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(25),
-          ),
+        child: Components.bottomSheet(
+          height: 180,
+          onWillPop: () => _homeState.deselectMode(),
+          cancelAction: () => _homeState.deselectMode(),
+          confirmAction: () => _homeState.deleteItem(),
+          children: [
+            Text(
+              Languages.current.deletionConfirmationText,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.tertiary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              textItem["text"],
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.error,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
-        builder: (context) {
-          return Components.bottomSheet(
-            height: 180,
-            onWillPop: () => _homeState.deselectMode(),
-            cancelAction: () => _homeState.deselectMode(),
-            confirmAction: () => _homeState.deleteItem(),
-            children: [
-              Text(
-                Languages.current.deletionConfirmationText,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.tertiary,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                textItem["text"],
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.error,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          );
-        },
       );
     }
   }

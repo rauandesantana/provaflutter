@@ -26,7 +26,9 @@ class _$PagesLoginState extends State<$PagesLogin> {
       if (_loginState.isSignIn) {
         // --------------------------------------------------------------------- Sign In
         appState.signIn(username: username, password: password).then((text) {
-          if (text != null) _showSnackBar(text);
+          if (text != null) {
+            Services.messages.showSnackBar(context: context, text: text);
+          }
         });
       } else {
         // --------------------------------------------------------------------- Sign Up
@@ -41,7 +43,11 @@ class _$PagesLoginState extends State<$PagesLogin> {
             color = Theme.of(context).colorScheme.secondary;
           }
 
-          _showSnackBar(result["text"], color: color);
+          Services.messages.showSnackBar(
+            context: context,
+            text: result["text"],
+            color: color,
+          );
         });
       }
     }
@@ -65,22 +71,6 @@ class _$PagesLoginState extends State<$PagesLogin> {
     } else {
       return null;
     }
-  }
-
-  // --------------------------------------------------------------------------- Show SnackBar
-  void _showSnackBar(String text, {Color? color}) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: color ?? Theme.of(context).colorScheme.error,
-        content: Text(
-          text,
-          style: TextStyle(
-            fontSize: 16,
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
-        ),
-      ),
-    );
   }
 
   @override
