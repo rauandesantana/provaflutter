@@ -9,26 +9,7 @@ class ProvidersHomeState = ProvidersHomeStateBase with _$ProvidersHomeState;
 abstract class ProvidersHomeStateBase with Store {
   //////////////////////////////////////////////////////////////////////////////
   @observable
-  List<ModalsTextItems> textList = [
-    ModalsTextItems(
-      id: 0,
-      text: "Rauan1",
-      editMode: false,
-      deleteMode: false,
-    ),
-    ModalsTextItems(
-      id: 1,
-      text: "Rauan2",
-      editMode: false,
-      deleteMode: false,
-    ),
-    ModalsTextItems(
-      id: 2,
-      text: "Rauan3",
-      editMode: false,
-      deleteMode: false,
-    ),
-  ];
+  List<ModalsTextItems> textList = [];
 
   @observable
   ModalsTextItems? selectedItem;
@@ -36,6 +17,11 @@ abstract class ProvidersHomeStateBase with Store {
   @observable
   bool blockScreen = false;
   //////////////////////////////////////////////////////////////////////////////
+
+  @action
+  void initializeTextList(List<ModalsTextItems> initializedList) {
+    if(textList.isEmpty) textList = initializedList;
+  }
 
   @action
   ModalsTextItems? activeEditMode(int index) {
@@ -59,14 +45,14 @@ abstract class ProvidersHomeStateBase with Store {
 
   @action
   void addItem(String text) {
-    textList.add(
-      ModalsTextItems(
-        id: textList.length,
-        text: text,
-        editMode: false,
-        deleteMode: false,
-      ),
+    final textItem = ModalsTextItems(
+      id: textList.length,
+      text: text,
+      editMode: false,
+      deleteMode: false,
     );
+
+    Services.data.addData(textItem).then((result) => textList = result);
   }
 
   @action
@@ -77,8 +63,10 @@ abstract class ProvidersHomeStateBase with Store {
         return textItem;
       }).toList();
 
-      textList = editTextList;
-      deselectMode();
+      Services.data.setData(editTextList).then((result) {
+        textList = result;
+        deselectMode();
+      });
     }
   }
 
@@ -87,9 +75,12 @@ abstract class ProvidersHomeStateBase with Store {
     if (selectedItem != null) {
       final editTextList = textList;
       editTextList.removeAt(selectedItem!.id);
-      textList = editTextList;
-      _listReindexing();
-      deselectMode();
+      final reindexedList = _listReindexing(editTextList);
+
+      Services.data.setData(reindexedList).then((result) {
+        textList = result;
+        deselectMode();
+      });
     }
   }
 
@@ -136,20 +127,20 @@ abstract class ProvidersHomeStateBase with Store {
       return textItem;
     }).toList();
 
-    textList = editTextList;
+    Services.data.setData(editTextList).then((result) => textList = result);
     return returnSelectItem;
   }
 
   // --------------------------------------------------------------------------- List Reindexing
-  void _listReindexing() {
+  List<ModalsTextItems> _listReindexing(List<ModalsTextItems> reindexingList) {
     int index = 0;
 
-    final editTextList = textList.map((textItem) {
+    final editTextList = reindexingList.map((textItem) {
       textItem.id = index;
       index++;
       return textItem;
     }).toList();
 
-    textList = editTextList;
+    return editTextList;
   }
 }

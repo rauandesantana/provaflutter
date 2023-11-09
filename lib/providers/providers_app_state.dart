@@ -81,6 +81,8 @@ class ProvidersAppState extends ChangeNotifier {
   void initialize(Iterable<Future> dependencyList) {
     if (_isInitialized == false) {
       Future.wait(dependencyList).then((dependencies) {
+        final data = dependencies.elementAt(0) as List<ModalsTextItems>;
+        providersHomeState.initializeTextList(data);
         _isInitialized = true;
       }).catchError((error, stack) {
         _alert = true;

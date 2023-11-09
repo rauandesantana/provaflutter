@@ -1,4 +1,3 @@
-
 // ============================================================================= Modals Text Items
 class ModalsTextItems {
   ModalsTextItems({
@@ -13,18 +12,30 @@ class ModalsTextItems {
   late String text;
   late bool editMode;
   late bool deleteMode;
+
+  // --------------------------------------------------------------------------- To Map
+  Map<String, dynamic> toMap() {
+    return Map.of({
+      "id": id,
+      "text": text,
+      "editMode": editMode,
+      "deleteMode": deleteMode,
+    });
+  }
   //////////////////////////////////////////////////////////////////////////////
-  static ModalsTextItems fromMap(Map<String, dynamic> map){
+
+  // --------------------------------------------------------------------------- From Map
+  static ModalsTextItems fromMap(Map<String, dynamic> map) {
     late int id;
     late String text;
     late bool editMode;
     late bool deleteMode;
 
     map.forEach((key, value) {
-      if(key == "id") id = value;
-      if(key == "text") text = value;
-      if(key == "editMode") editMode = value;
-      if(key == "deleteMode") deleteMode = value;
+      if (key == "id") id = value;
+      if (key == "text") text = value;
+      if (key == "editMode") editMode = value;
+      if (key == "deleteMode") deleteMode = value;
     });
 
     return ModalsTextItems(

@@ -61,6 +61,17 @@ mixin _$ProvidersHomeState on ProvidersHomeStateBase, Store {
       ActionController(name: 'ProvidersHomeStateBase', context: context);
 
   @override
+  void initializeTextList(List<ModalsTextItems> initializedList) {
+    final _$actionInfo = _$ProvidersHomeStateBaseActionController.startAction(
+        name: 'ProvidersHomeStateBase.initializeTextList');
+    try {
+      return super.initializeTextList(initializedList);
+    } finally {
+      _$ProvidersHomeStateBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   ModalsTextItems? activeEditMode(int index) {
     final _$actionInfo = _$ProvidersHomeStateBaseActionController.startAction(
         name: 'ProvidersHomeStateBase.activeEditMode');

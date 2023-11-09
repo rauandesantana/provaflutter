@@ -38,9 +38,10 @@ class _$PagesSplashScreenState extends State<$PagesSplashScreen>
     if (appState.isInitialized == false) {
       appState.initialize([
         // --------------------------------------------------------------------- List Dependencies
+        Services.data.getData(),
         Future.delayed(const Duration(seconds: 2), () => "firebase"),
         Future.delayed(const Duration(seconds: 1), () => "another"),
-        // Para Testar o Alerta de Erro ao Carregar
+        // --------------------------------------------------------------------- Para Testar o Alerta de Erro ao Carregar
         // Future.delayed(const Duration(seconds: 3), () => throw "errorAlert"),
       ]);
     } else {
