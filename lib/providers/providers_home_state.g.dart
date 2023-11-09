@@ -67,11 +67,22 @@ mixin _$ProvidersHomeState on ProvidersHomeStateBase, Store {
   }
 
   @override
-  void editItem() {
+  void addItem(String text) {
+    final _$actionInfo = _$ProvidersHomeStateBaseActionController.startAction(
+        name: 'ProvidersHomeStateBase.addItem');
+    try {
+      return super.addItem(text);
+    } finally {
+      _$ProvidersHomeStateBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void editItem(String text) {
     final _$actionInfo = _$ProvidersHomeStateBaseActionController.startAction(
         name: 'ProvidersHomeStateBase.editItem');
     try {
-      return super.editItem();
+      return super.editItem(text);
     } finally {
       _$ProvidersHomeStateBaseActionController.endAction(_$actionInfo);
     }

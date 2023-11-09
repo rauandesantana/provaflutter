@@ -64,6 +64,17 @@ class _$PagesHomeState extends State<$PagesHome> {
     }
   }
 
+  // --------------------------------------------------------------------------- Keyboard Action
+  void _keyboardAction(bool editMode) {
+    if (editMode == true) {
+      _homeState.editItem(_textController.text);
+      _textController.clear();
+    } else {
+      _homeState.addItem(_textController.text);
+      _textController.clear();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -110,16 +121,16 @@ class _$PagesHomeState extends State<$PagesHome> {
                       Observer(
                         builder: (context) {
                           final selectItem = _homeState.selectedItem;
+                          final editMode = selectItem?["editMode"] ?? false;
 
                           return Components.textFormField(
                             controller: _textController,
                             hintText: Languages.current.enterYourText,
                             textAlign: TextAlign.center,
                             prefixSizeIcon: 14,
-                            prefixIcon: (selectItem?["editMode"] == true)
-                                ? Icons.edit_rounded
-                                : null,
-                            keyboardAction: () {},
+                            prefixIcon:
+                                (editMode == true) ? Icons.edit_rounded : null,
+                            keyboardAction: () => _keyboardAction(editMode),
                           );
                         },
                       ),

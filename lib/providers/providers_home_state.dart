@@ -54,13 +54,34 @@ abstract class ProvidersHomeStateBase with Store {
   }
 
   @action
-  void editItem() {
-    deselectMode();
+  void addItem(String text) {
+    textList.add({
+      "id": textList.length,
+      "text": text,
+      "editMode": false,
+      "deleteMode": false,
+    });
+  }
+
+  @action
+  void editItem(String text) {
+    if (selectedItem != null) {
+      final editTextList = textList.map((textItem) {
+        if (textItem["id"] == selectedItem!["id"]) {
+          textItem.update("text", (value) => text);
+        }
+
+        return textItem;
+      }).toList();
+
+      textList = editTextList;
+      deselectMode();
+    }
   }
 
   @action
   void deleteItem() {
-    if(selectedItem != null) {
+    if (selectedItem != null) {
       final editTextList = textList;
       editTextList.removeAt(selectedItem!["id"]);
       textList = editTextList;
@@ -115,7 +136,6 @@ abstract class ProvidersHomeStateBase with Store {
     return returnSelectItem;
   }
 
-
   // --------------------------------------------------------------------------- List Reindexing
   void _listReindexing() {
     int index = 0;
@@ -128,5 +148,4 @@ abstract class ProvidersHomeStateBase with Store {
 
     textList = editTextList;
   }
-
 }
