@@ -89,57 +89,60 @@ class _$PagesLoginState extends State<$PagesLogin> {
               child: Center(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(horizontal: 50),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // ----------------------------------------------------- User Field
-                        Components.textFormField(
-                          controller: _userControler,
-                          title: Languages.current.user,
-                          prefixIcon: Assets.icons.userRounded,
-                          prefixSizeIcon: 14,
-                          textInputAction: TextInputAction.next,
-                          validator: _validatorUser,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(20),
-                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                          ],
-                        ),
-                        const Padding(padding: EdgeInsets.only(bottom: 15)),
-                        // ----------------------------------------------------- Password Field
-                        Components.textFormField(
-                          controller: _passControler,
-                          title: Languages.current.password,
-                          prefixIcon: Assets.icons.lockRounded,
-                          prefixSizeIcon: 18,
-                          obscureText: true,
-                          textInputAction: TextInputAction.done,
-                          keyboardAction: _checkButton,
-                          validator: _validatorPass,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(20),
-                            FilteringTextInputFormatter.allow(
-                              RegExp(r'[a-zA-Z0-9]'),
-                            ),
-                          ],
-                        ),
-                        const Padding(padding: EdgeInsets.only(bottom: 25)),
-                        // ----------------------------------------------------- Sign In Button
-                        ElevatedButton(
-                          onPressed: _checkButton,
-                          child: Observer(
-                            builder: (context) {
-                              return Text(
-                                (_loginState.isSignIn)
-                                    ? Languages.current.signIn
-                                    : Languages.current.signUp,
-                              );
-                            },
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 400),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // ----------------------------------------------------- User Field
+                          Components.textFormField(
+                            controller: _userControler,
+                            title: Languages.current.user,
+                            prefixIcon: Assets.icons.userRounded,
+                            prefixSizeIcon: 14,
+                            textInputAction: TextInputAction.next,
+                            validator: _validatorUser,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(20),
+                              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                            ],
                           ),
-                        ),
-                      ],
+                          const Padding(padding: EdgeInsets.only(bottom: 15)),
+                          // ----------------------------------------------------- Password Field
+                          Components.textFormField(
+                            controller: _passControler,
+                            title: Languages.current.password,
+                            prefixIcon: Assets.icons.lockRounded,
+                            prefixSizeIcon: 18,
+                            obscureText: true,
+                            textInputAction: TextInputAction.done,
+                            keyboardAction: _checkButton,
+                            validator: _validatorPass,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(20),
+                              FilteringTextInputFormatter.allow(
+                                RegExp(r'[a-zA-Z0-9]'),
+                              ),
+                            ],
+                          ),
+                          const Padding(padding: EdgeInsets.only(bottom: 25)),
+                          // ----------------------------------------------------- Sign In Button
+                          ElevatedButton(
+                            onPressed: _checkButton,
+                            child: Observer(
+                              builder: (context) {
+                                return Text(
+                                  (_loginState.isSignIn)
+                                      ? Languages.current.signIn
+                                      : Languages.current.signUp,
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

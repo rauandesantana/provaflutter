@@ -19,7 +19,7 @@ class $ComponentsTextList extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(bottom: 50),
       child: SizedBox(
-        width: width ?? 350,
+        width: width ?? 400,
         height: height ?? 320,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(15),

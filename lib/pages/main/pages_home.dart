@@ -116,45 +116,48 @@ class _$PagesHomeState extends State<$PagesHome> {
                       child: SingleChildScrollView(
                         physics: const NeverScrollableScrollPhysics(),
                         padding: const EdgeInsets.symmetric(horizontal: 50),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // ------------------------------------------------- Text List
-                            Components.textList(
-                              textList: _homeState.textList,
-                              itemBuilder: (context, index) {
-                                final textItem = _homeState.textList[index];
-                                // --------------------------------------------- Text Item
-                                return Components.textItem(
-                                  index: index,
-                                  text: textItem.text,
-                                  editMode: textItem.editMode,
-                                  deleteMode: textItem.deleteMode,
-                                  editAction: _editAction,
-                                  deleteAction: _deleteAction,
-                                );
-                              },
-                            ),
-                            Form(
-                              key: _formKey,
-                              // ----------------------------------------------- Text Field
-                              child: Components.textFormField(
-                                controller: _textController,
-                                focusNode: _focusNode,
-                                hintText: Languages.current.enterYourText,
-                                textAlign: TextAlign.center,
-                                prefixSizeIcon: 14,
-                                validator: _validatorText,
-                                prefixIcon: (selectEditMode == true)
-                                    ? Icons.edit_rounded
-                                    : null,
-                                textInputAction: TextInputAction.send,
-                                keyboardAction: () {
-                                  _keyboardAction(selectEditMode);
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 400),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              // ------------------------------------------------- Text List
+                              Components.textList(
+                                textList: _homeState.textList,
+                                itemBuilder: (context, index) {
+                                  final textItem = _homeState.textList[index];
+                                  // --------------------------------------------- Text Item
+                                  return Components.textItem(
+                                    index: index,
+                                    text: textItem.text,
+                                    editMode: textItem.editMode,
+                                    deleteMode: textItem.deleteMode,
+                                    editAction: _editAction,
+                                    deleteAction: _deleteAction,
+                                  );
                                 },
                               ),
-                            ),
-                          ],
+                              Form(
+                                key: _formKey,
+                                // ----------------------------------------------- Text Field
+                                child: Components.textFormField(
+                                  controller: _textController,
+                                  focusNode: _focusNode,
+                                  hintText: Languages.current.enterYourText,
+                                  textAlign: TextAlign.center,
+                                  prefixSizeIcon: 14,
+                                  validator: _validatorText,
+                                  prefixIcon: (selectEditMode == true)
+                                      ? Icons.edit_rounded
+                                      : null,
+                                  textInputAction: TextInputAction.send,
+                                  keyboardAction: () {
+                                    _keyboardAction(selectEditMode);
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
