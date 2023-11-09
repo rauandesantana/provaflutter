@@ -8,7 +8,7 @@
   "user" : "User",
   "password" : "Password",
   "validatorIsEmpty" : "Required field.",
-  "validatorPassMin" : "The password must contain more than one character.",
+  "validatorPassMin" : "Password must contain more than one char.",
   "invalidUserOrPass" : "Invalid user or password.",
   "invalidUser" : "Invalid user.",
   "errorAuthentication" : "Authentication error.",

@@ -45,6 +45,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "validatorIsEmpty":
             MessageLookupByLibrary.simpleMessage("Required field."),
         "validatorPassMin": MessageLookupByLibrary.simpleMessage(
-            "The password must contain more than one character.")
+            "Password must contain more than one char.")
       };
 }
