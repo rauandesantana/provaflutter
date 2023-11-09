@@ -11,6 +11,10 @@ class _$PagesHomeState extends State<$PagesHome> {
   late final ProvidersHomeState _homeState;
   final String _urlPrivacyPolicy = "https://google.com.br";
   final _textController = TextEditingController();
+  final _focusNode = FocusNode(
+    canRequestFocus: true,
+    skipTraversal: true,
+  );
 
   // --------------------------------------------------------------------------- Edit Action
   void _editAction(int index) {
@@ -18,8 +22,10 @@ class _$PagesHomeState extends State<$PagesHome> {
 
     if (textItem != null) {
       _textController.text = textItem["text"];
+      _focusNode.requestFocus();
     } else {
       _textController.clear();
+      _focusNode.unfocus();
     }
   }
 
@@ -82,94 +88,103 @@ class _$PagesHomeState extends State<$PagesHome> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _homeState.setBlockScreen(MediaQuery.of(context).viewInsets.bottom != 0);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final keyboard = MediaQuery.of(context).viewInsets.bottom != 0;
+    return Observer(
+      builder: (context) {
+        final selectItem = _homeState.selectedItem;
+        final selectEditMode = selectItem?["editMode"] ?? false;
 
-    return Scaffold(
-      body: Components.bodyGradient(
-        child: Column(
-          children: [
-            Expanded(
-              child: Center(
-                child: SingleChildScrollView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(horizontal: 50),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // ------------------------------------------------------- Text List
-                      Observer(
-                        builder: (context) {
-                          return Components.textList(
-                            textList: _homeState.textList,
-                            itemBuilder: (context, index) {
-                              final textItem = _homeState.textList[index];
-                              // ----------------------------------------------- Text Item
-                              return Components.textItem(
-                                index: index,
-                                text: textItem["text"],
-                                editMode: textItem["editMode"],
-                                deleteMode: textItem["deleteMode"],
-                                editAction: _editAction,
-                                deleteAction: _deleteAction,
-                              );
-                            },
-                          );
-                        },
-                      ),
-                      // ------------------------------------------------------- Text Field
-                      Observer(
-                        builder: (context) {
-                          final selectItem = _homeState.selectedItem;
-                          final editMode = selectItem?["editMode"] ?? false;
-
-                          return Components.textFormField(
-                            controller: _textController,
-                            hintText: Languages.current.enterYourText,
-                            textAlign: TextAlign.center,
-                            prefixSizeIcon: 14,
-                            prefixIcon:
-                                (editMode == true) ? Icons.edit_rounded : null,
-                            keyboardAction: () => _keyboardAction(editMode),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Visibility(
-              visible: !keyboard,
+        return Components.blockScreen(
+          isBlocked: _homeState.blockScreen,
+          child: Scaffold(
+            body: Components.bodyGradient(
               child: Column(
                 children: [
-                  const Padding(padding: EdgeInsets.only(bottom: 25)),
-                  // ----------------------------------------------------------- Privacy Policy Button
-                  GestureDetector(
-                    onTap: () => Services.launcherUrl.open(_urlPrivacyPolicy),
-                    child: Text(Languages.current.privacyPolicy),
+                  Expanded(
+                    child: Center(
+                      child: SingleChildScrollView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(horizontal: 50),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            // ------------------------------------------------- Text List
+                            Components.textList(
+                              textList: _homeState.textList,
+                              itemBuilder: (context, index) {
+                                final textItem = _homeState.textList[index];
+                                // --------------------------------------------- Text Item
+                                return Components.textItem(
+                                  index: index,
+                                  text: textItem["text"],
+                                  editMode: textItem["editMode"],
+                                  deleteMode: textItem["deleteMode"],
+                                  editAction: _editAction,
+                                  deleteAction: _deleteAction,
+                                );
+                              },
+                            ),
+                            // ------------------------------------------------- Text Field
+                            Components.textFormField(
+                              controller: _textController,
+                              focusNode: _focusNode,
+                              hintText: Languages.current.enterYourText,
+                              textAlign: TextAlign.center,
+                              prefixSizeIcon: 14,
+                              prefixIcon: (selectEditMode == true)
+                                  ? Icons.edit_rounded
+                                  : null,
+                              keyboardAction: () {
+                                _keyboardAction(selectEditMode);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                  const Padding(padding: EdgeInsets.only(bottom: 25)),
+                  Visibility(
+                    visible: !_homeState.blockScreen,
+                    child: Column(
+                      children: [
+                        const Padding(padding: EdgeInsets.only(bottom: 25)),
+                        // ----------------------------------------------------- Privacy Policy Button
+                        GestureDetector(
+                          onTap: () =>
+                              Services.launcherUrl.open(_urlPrivacyPolicy),
+                          child: Text(Languages.current.privacyPolicy),
+                        ),
+                        const Padding(padding: EdgeInsets.only(bottom: 25)),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-          ],
-        ),
-      ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(top: 50),
-        child: Column(
-          children: [
-            FloatingActionButton(
-              onPressed: () {
-                final appState = context.read<ProvidersAppState>();
-                appState.signOut();
-              },
-              child: const Icon(Icons.logout_rounded),
+            floatingActionButton: Padding(
+              padding: const EdgeInsets.only(top: 50),
+              child: Column(
+                children: [
+                  // ----------------------------------------------------------- Sign Out Button
+                  FloatingActionButton(
+                    onPressed: () {
+                      final appState = context.read<ProvidersAppState>();
+                      appState.signOut();
+                    },
+                    child: const Icon(Icons.logout_rounded),
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

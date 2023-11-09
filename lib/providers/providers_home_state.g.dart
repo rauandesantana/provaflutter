@@ -41,6 +41,22 @@ mixin _$ProvidersHomeState on ProvidersHomeStateBase, Store {
     });
   }
 
+  late final _$blockScreenAtom =
+      Atom(name: 'ProvidersHomeStateBase.blockScreen', context: context);
+
+  @override
+  bool get blockScreen {
+    _$blockScreenAtom.reportRead();
+    return super.blockScreen;
+  }
+
+  @override
+  set blockScreen(bool value) {
+    _$blockScreenAtom.reportWrite(value, super.blockScreen, () {
+      super.blockScreen = value;
+    });
+  }
+
   late final _$ProvidersHomeStateBaseActionController =
       ActionController(name: 'ProvidersHomeStateBase', context: context);
 
@@ -111,10 +127,22 @@ mixin _$ProvidersHomeState on ProvidersHomeStateBase, Store {
   }
 
   @override
+  void setBlockScreen(bool value) {
+    final _$actionInfo = _$ProvidersHomeStateBaseActionController.startAction(
+        name: 'ProvidersHomeStateBase.setBlockScreen');
+    try {
+      return super.setBlockScreen(value);
+    } finally {
+      _$ProvidersHomeStateBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 textList: ${textList},
-selectedItem: ${selectedItem}
+selectedItem: ${selectedItem},
+blockScreen: ${blockScreen}
     ''';
   }
 }

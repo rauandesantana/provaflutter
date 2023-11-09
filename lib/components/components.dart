@@ -1,3 +1,4 @@
+import 'package:provaflutter/components/components_block_screen.dart';
 import 'package:provaflutter/components/components_body_gradient.dart';
 import 'package:provaflutter/components/components_bottom_sheet.dart';
 import 'package:provaflutter/components/components_text_form_field.dart';
@@ -26,6 +27,7 @@ class Components {
   // --------------------------------------------------------------------------- Text Form Field
   static Widget textFormField({
     TextEditingController? controller,
+    FocusNode? focusNode,
     String? title,
     String? hintText,
     IconData? prefixIcon,
@@ -33,13 +35,14 @@ class Components {
     bool? obscureText,
     List<TextInputFormatter>? inputFormatters,
     TextInputAction? textInputAction,
-    VoidCallback? keyboardAction,
     TextInputType? keyboardType,
+    VoidCallback? keyboardAction,
     FormFieldValidator<String>? validator,
     TextAlign? textAlign,
   }) {
     return $ComponentsTextFormField(
       controller: controller,
+      focusNode: focusNode,
       title: title,
       hintText: hintText,
       prefixIcon: prefixIcon,
@@ -47,8 +50,8 @@ class Components {
       obscureText: obscureText,
       inputFormatters: inputFormatters,
       textInputAction: textInputAction,
-      keyboardAction: keyboardAction,
       keyboardType: keyboardType,
+      keyboardAction: keyboardAction,
       validator: validator,
       textAlign: textAlign,
     );
@@ -104,6 +107,17 @@ class Components {
       cancelAction: cancelAction,
       confirmAction: confirmAction,
       children: children,
+    );
+  }
+
+  // --------------------------------------------------------------------------- Block Screen
+  static Widget blockScreen({
+    bool? isBlocked,
+    required Widget child,
+  }) {
+    return $ComponentesBlockScreen(
+      isBlocked: isBlocked,
+      child: child,
     );
   }
 }

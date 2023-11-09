@@ -31,6 +31,9 @@ abstract class ProvidersHomeStateBase with Store {
 
   @observable
   Map<String, dynamic>? selectedItem;
+
+  @observable
+  bool blockScreen = false;
   //////////////////////////////////////////////////////////////////////////////
 
   @action
@@ -97,6 +100,13 @@ abstract class ProvidersHomeStateBase with Store {
       editMode: false,
       deleteMode: false,
     );
+  }
+
+  @action
+  void setBlockScreen(bool value) {
+    if(blockScreen != value) {
+      blockScreen = value;
+    }
   }
 
   // --------------------------------------------------------------------------- Switch Mode

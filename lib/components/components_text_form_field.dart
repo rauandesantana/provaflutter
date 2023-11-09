@@ -4,6 +4,7 @@ class $ComponentsTextFormField extends StatelessWidget {
   const $ComponentsTextFormField({
     super.key,
     required this.controller,
+    required this.focusNode,
     required this.title,
     required this.hintText,
     required this.prefixIcon,
@@ -11,13 +12,14 @@ class $ComponentsTextFormField extends StatelessWidget {
     required this.obscureText,
     required this.inputFormatters,
     required this.textInputAction,
-    required this.keyboardAction,
     required this.keyboardType,
+    required this.keyboardAction,
     required this.validator,
     required this.textAlign,
   });
 
   final TextEditingController? controller;
+  final FocusNode? focusNode;
   final String? title;
   final String? hintText;
   final IconData? prefixIcon;
@@ -25,8 +27,8 @@ class $ComponentsTextFormField extends StatelessWidget {
   final bool? obscureText;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputAction? textInputAction;
-  final VoidCallback? keyboardAction;
   final TextInputType? keyboardType;
+  final VoidCallback? keyboardAction;
   final FormFieldValidator<String>? validator;
   final TextAlign? textAlign;
 
@@ -45,6 +47,7 @@ class $ComponentsTextFormField extends StatelessWidget {
         ),
         TextFormField(
           controller: controller,
+          focusNode: focusNode,
           obscureText: obscureText ?? false,
           inputFormatters: inputFormatters,
           textInputAction: textInputAction,
