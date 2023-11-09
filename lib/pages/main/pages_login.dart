@@ -126,6 +126,7 @@ class _$PagesLoginState extends State<$PagesLogin> {
                           prefixSizeIcon: 18,
                           obscureText: true,
                           textInputAction: TextInputAction.done,
+                          keyboardAction: _checkButton,
                           validator: _validatorPass,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(20),

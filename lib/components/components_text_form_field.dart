@@ -11,6 +11,7 @@ class $ComponentsTextFormField extends StatelessWidget {
     required this.obscureText,
     required this.inputFormatters,
     required this.textInputAction,
+    required this.keyboardAction,
     required this.keyboardType,
     required this.validator,
     required this.textAlign,
@@ -24,6 +25,7 @@ class $ComponentsTextFormField extends StatelessWidget {
   final bool? obscureText;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputAction? textInputAction;
+  final VoidCallback? keyboardAction;
   final TextInputType? keyboardType;
   final FormFieldValidator<String>? validator;
   final TextAlign? textAlign;
@@ -47,6 +49,9 @@ class $ComponentsTextFormField extends StatelessWidget {
           inputFormatters: inputFormatters,
           textInputAction: textInputAction,
           keyboardType: keyboardType ?? TextInputType.text,
+          onFieldSubmitted: (keyboardAction != null)
+              ? (_) => keyboardAction!()
+              : null,
           validator: validator,
           textAlign: textAlign ?? TextAlign.start,
           decoration: InputDecoration(
