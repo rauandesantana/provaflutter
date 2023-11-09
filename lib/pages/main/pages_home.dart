@@ -22,7 +22,7 @@ class _$PagesHomeState extends State<$PagesHome> {
     final textItem = _homeState.activeEditMode(index);
 
     if (textItem != null) {
-      _textController.text = textItem["text"];
+      _textController.text = textItem.text;
       _focusNode.requestFocus();
     } else {
       _textController.clear();
@@ -51,7 +51,7 @@ class _$PagesHomeState extends State<$PagesHome> {
               ),
             ),
             Text(
-              textItem["text"],
+              textItem.text,
               style: TextStyle(
                 color: Theme.of(context).colorScheme.error,
                 fontWeight: FontWeight.bold,
@@ -103,7 +103,7 @@ class _$PagesHomeState extends State<$PagesHome> {
     return Observer(
       builder: (context) {
         final selectItem = _homeState.selectedItem;
-        final selectEditMode = selectItem?["editMode"] ?? false;
+        final selectEditMode = selectItem?.editMode ?? false;
 
         return Components.blockScreen(
           isBlocked: _homeState.blockScreen,
@@ -127,9 +127,9 @@ class _$PagesHomeState extends State<$PagesHome> {
                                 // --------------------------------------------- Text Item
                                 return Components.textItem(
                                   index: index,
-                                  text: textItem["text"],
-                                  editMode: textItem["editMode"],
-                                  deleteMode: textItem["deleteMode"],
+                                  text: textItem.text,
+                                  editMode: textItem.editMode,
+                                  deleteMode: textItem.deleteMode,
                                   editAction: _editAction,
                                   deleteAction: _deleteAction,
                                 );

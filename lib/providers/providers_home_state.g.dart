@@ -13,13 +13,13 @@ mixin _$ProvidersHomeState on ProvidersHomeStateBase, Store {
       Atom(name: 'ProvidersHomeStateBase.textList', context: context);
 
   @override
-  List<Map<String, dynamic>> get textList {
+  List<ModalsTextItems> get textList {
     _$textListAtom.reportRead();
     return super.textList;
   }
 
   @override
-  set textList(List<Map<String, dynamic>> value) {
+  set textList(List<ModalsTextItems> value) {
     _$textListAtom.reportWrite(value, super.textList, () {
       super.textList = value;
     });
@@ -29,13 +29,13 @@ mixin _$ProvidersHomeState on ProvidersHomeStateBase, Store {
       Atom(name: 'ProvidersHomeStateBase.selectedItem', context: context);
 
   @override
-  Map<String, dynamic>? get selectedItem {
+  ModalsTextItems? get selectedItem {
     _$selectedItemAtom.reportRead();
     return super.selectedItem;
   }
 
   @override
-  set selectedItem(Map<String, dynamic>? value) {
+  set selectedItem(ModalsTextItems? value) {
     _$selectedItemAtom.reportWrite(value, super.selectedItem, () {
       super.selectedItem = value;
     });
@@ -61,7 +61,7 @@ mixin _$ProvidersHomeState on ProvidersHomeStateBase, Store {
       ActionController(name: 'ProvidersHomeStateBase', context: context);
 
   @override
-  Map<String, dynamic>? activeEditMode(int index) {
+  ModalsTextItems? activeEditMode(int index) {
     final _$actionInfo = _$ProvidersHomeStateBaseActionController.startAction(
         name: 'ProvidersHomeStateBase.activeEditMode');
     try {
@@ -72,7 +72,7 @@ mixin _$ProvidersHomeState on ProvidersHomeStateBase, Store {
   }
 
   @override
-  Map<String, dynamic>? activeDeleteMode(int index) {
+  ModalsTextItems? activeDeleteMode(int index) {
     final _$actionInfo = _$ProvidersHomeStateBaseActionController.startAction(
         name: 'ProvidersHomeStateBase.activeDeleteMode');
     try {

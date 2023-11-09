@@ -61,7 +61,7 @@ class Components {
   static Widget textList({
     double? width,
     double? height,
-    required List<Map<String, dynamic>> textList,
+    required List<ModalsTextItems> textList,
     required NullableIndexedWidgetBuilder itemBuilder,
   }) {
     return $ComponentsTextList(

@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:provaflutter/import_collections.dart';
 part 'providers_home_state.g.dart';
 
 // ============================================================================= Providers Home State
@@ -8,36 +9,36 @@ class ProvidersHomeState = ProvidersHomeStateBase with _$ProvidersHomeState;
 abstract class ProvidersHomeStateBase with Store {
   //////////////////////////////////////////////////////////////////////////////
   @observable
-  List<Map<String, dynamic>> textList = [
-    {
-      "id": 0,
-      "text": "Rauan1",
-      "editMode": false,
-      "deleteMode": false,
-    },
-    {
-      "id": 1,
-      "text": "Rauan2",
-      "editMode": false,
-      "deleteMode": false,
-    },
-    {
-      "id": 2,
-      "text": "Rauan3",
-      "editMode": false,
-      "deleteMode": false,
-    }
+  List<ModalsTextItems> textList = [
+    ModalsTextItems(
+      id: 0,
+      text: "Rauan1",
+      editMode: false,
+      deleteMode: false,
+    ),
+    ModalsTextItems(
+      id: 1,
+      text: "Rauan2",
+      editMode: false,
+      deleteMode: false,
+    ),
+    ModalsTextItems(
+      id: 2,
+      text: "Rauan3",
+      editMode: false,
+      deleteMode: false,
+    ),
   ];
 
   @observable
-  Map<String, dynamic>? selectedItem;
+  ModalsTextItems? selectedItem;
 
   @observable
   bool blockScreen = false;
   //////////////////////////////////////////////////////////////////////////////
 
   @action
-  Map<String, dynamic>? activeEditMode(int index) {
+  ModalsTextItems? activeEditMode(int index) {
     selectedItem = _switchMode(
       index: index,
       editMode: true,
@@ -47,7 +48,7 @@ abstract class ProvidersHomeStateBase with Store {
   }
 
   @action
-  Map<String, dynamic>? activeDeleteMode(int index) {
+  ModalsTextItems? activeDeleteMode(int index) {
     selectedItem = _switchMode(
       index: index,
       editMode: false,
@@ -58,22 +59,21 @@ abstract class ProvidersHomeStateBase with Store {
 
   @action
   void addItem(String text) {
-    textList.add({
-      "id": textList.length,
-      "text": text,
-      "editMode": false,
-      "deleteMode": false,
-    });
+    textList.add(
+      ModalsTextItems(
+        id: textList.length,
+        text: text,
+        editMode: false,
+        deleteMode: false,
+      ),
+    );
   }
 
   @action
   void editItem(String text) {
     if (selectedItem != null) {
       final editTextList = textList.map((textItem) {
-        if (textItem["id"] == selectedItem!["id"]) {
-          textItem.update("text", (value) => text);
-        }
-
+        if (textItem.id == selectedItem!.id) textItem.text = text;
         return textItem;
       }).toList();
 
@@ -86,7 +86,7 @@ abstract class ProvidersHomeStateBase with Store {
   void deleteItem() {
     if (selectedItem != null) {
       final editTextList = textList;
-      editTextList.removeAt(selectedItem!["id"]);
+      editTextList.removeAt(selectedItem!.id);
       textList = editTextList;
       _listReindexing();
       deselectMode();
@@ -104,39 +104,33 @@ abstract class ProvidersHomeStateBase with Store {
 
   @action
   void setBlockScreen(bool value) {
-    if(blockScreen != value) {
+    if (blockScreen != value) {
       blockScreen = value;
     }
   }
 
   // --------------------------------------------------------------------------- Switch Mode
-  Map<String, dynamic>? _switchMode({
+  ModalsTextItems? _switchMode({
     required int? index,
     required bool editMode,
     required bool deleteMode,
   }) {
-    Map<String, dynamic>? returnSelectItem;
+    ModalsTextItems? returnSelectItem;
 
     final editTextList = textList.map((textItem) {
-      final itemEditMode = textItem["editMode"];
-      final itemDeleteMode = textItem["deleteMode"];
+      final itemEditMode = textItem.editMode;
+      final itemDeleteMode = textItem.deleteMode;
       final noEditMode = ((itemEditMode == false) != (editMode == false));
       final noDeleteMode = ((itemDeleteMode == false) != (deleteMode == false));
       final defaultMode = noEditMode || noDeleteMode;
 
-      if (textItem["id"] == index && defaultMode) {
-        textItem.updateAll((key, value) {
-          if (key == "editMode") return editMode;
-          if (key == "deleteMode") return deleteMode;
-          return value;
-        });
+      if (textItem.id == index && defaultMode) {
+        textItem.editMode = editMode;
+        textItem.deleteMode = deleteMode;
         returnSelectItem = textItem;
       } else {
-        textItem.updateAll((key, value) {
-          if (key == "editMode") return false;
-          if (key == "deleteMode") return false;
-          return value;
-        });
+        textItem.editMode = false;
+        textItem.deleteMode = false;
       }
 
       return textItem;
@@ -151,7 +145,7 @@ abstract class ProvidersHomeStateBase with Store {
     int index = 0;
 
     final editTextList = textList.map((textItem) {
-      textItem.update("id", (value) => index);
+      textItem.id = index;
       index++;
       return textItem;
     }).toList();

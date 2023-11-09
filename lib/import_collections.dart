@@ -10,6 +10,8 @@ export 'package:provaflutter/components/components.dart';
 export 'package:provaflutter/services/services.dart';
 // ============================================================================= Constants
 export 'package:provaflutter/constants/pages_tags.dart';
+// ============================================================================= Modals
+export 'package:provaflutter/modals/modals_text_Items.dart';
 // ============================================================================= Packages
 export 'package:provaflutter/languages/generated/l10n.dart';
 export 'package:url_launcher/url_launcher.dart';
