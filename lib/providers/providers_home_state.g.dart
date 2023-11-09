@@ -89,6 +89,17 @@ mixin _$ProvidersHomeState on ProvidersHomeStateBase, Store {
   }
 
   @override
+  void deselectMode() {
+    final _$actionInfo = _$ProvidersHomeStateBaseActionController.startAction(
+        name: 'ProvidersHomeStateBase.deselectMode');
+    try {
+      return super.deselectMode();
+    } finally {
+      _$ProvidersHomeStateBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 textList: ${textList},

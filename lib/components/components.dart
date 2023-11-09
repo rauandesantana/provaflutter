@@ -1,4 +1,5 @@
 import 'package:provaflutter/components/components_body_gradient.dart';
+import 'package:provaflutter/components/components_bottom_sheet.dart';
 import 'package:provaflutter/components/components_text_form_field.dart';
 import 'package:provaflutter/components/components_text_item.dart';
 import 'package:provaflutter/components/components_text_list.dart';
@@ -82,6 +83,25 @@ class Components {
       deleteMode: deleteMode,
       editAction: editAction,
       deleteAction: deleteAction,
+    );
+  }
+
+  // --------------------------------------------------------------------------- Bottom Sheet
+  static Widget bottomSheet({
+    bool? persistent,
+    double? height,
+    VoidCallback? onWillPop,
+    required VoidCallback? cancelAction,
+    required VoidCallback? confirmAction,
+    required List<Widget> children,
+  }) {
+    return $ComponentsBottomSheet(
+      persistent: persistent,
+      height: height,
+      onWillPop: onWillPop,
+      cancelAction: cancelAction,
+      confirmAction: confirmAction,
+      children: children,
     );
   }
 }

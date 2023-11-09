@@ -55,11 +55,7 @@ abstract class ProvidersHomeStateBase with Store {
 
   @action
   void editItem() {
-    selectedItem = _switchMode(
-      index: null,
-      editMode: false,
-      deleteMode: false,
-    );
+    deselectMode();
   }
 
   @action
@@ -69,14 +65,17 @@ abstract class ProvidersHomeStateBase with Store {
       editTextList.removeAt(selectedItem!["id"]);
       textList = editTextList;
       _listReindexing();
-
-
-      selectedItem = _switchMode(
-        index: null,
-        editMode: false,
-        deleteMode: false,
-      );
+      deselectMode();
     }
+  }
+
+  @action
+  void deselectMode() {
+    selectedItem = _switchMode(
+      index: null,
+      editMode: false,
+      deleteMode: false,
+    );
   }
 
   // --------------------------------------------------------------------------- Switch Mode

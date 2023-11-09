@@ -12,5 +12,9 @@
   "invalidUserOrPass" : "Usuario ou senha inválidos.",
   "invalidUser" : "Usuário inválido.",
   "errorAuthentication" : "Erro na autenticação.",
-  "userCreatedSuccessfully" : "O Usuário foi criado com sucesso."
+  "userCreatedSuccessfully" : "O Usuário foi criado com sucesso.",
+  "enterYourText" : "Digite seu texto",
+  "confirm" : "Confirmar",
+  "cancel" : "Cancelar",
+  "deletionConfirmationText": "Deseja realmente excluir este texto?"
 }

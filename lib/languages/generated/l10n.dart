@@ -179,6 +179,46 @@ class Languages {
       args: [],
     );
   }
+
+  /// `Digite seu texto`
+  String get enterYourText {
+    return Intl.message(
+      'Digite seu texto',
+      name: 'enterYourText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirmar`
+  String get confirm {
+    return Intl.message(
+      'Confirmar',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancelar`
+  String get cancel {
+    return Intl.message(
+      'Cancelar',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deseja realmente excluir este texto?`
+  String get deletionConfirmationText {
+    return Intl.message(
+      'Deseja realmente excluir este texto?',
+      name: 'deletionConfirmationText',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Languages> {

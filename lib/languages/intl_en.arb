@@ -12,5 +12,9 @@
   "invalidUserOrPass" : "Invalid user or password.",
   "invalidUser" : "Invalid user.",
   "errorAuthentication" : "Authentication error.",
-  "userCreatedSuccessfully" : "The User was created successfully."
+  "userCreatedSuccessfully" : "The User was created successfully.",
+  "enterYourText" : "Enter your text",
+  "confirm" : "Confirm",
+  "cancel" : "Cancel",
+  "deletionConfirmationText" : "Do you really want to delete this text?"
 }

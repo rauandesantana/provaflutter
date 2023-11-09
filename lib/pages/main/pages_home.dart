@@ -28,19 +28,39 @@ class _$PagesHomeState extends State<$PagesHome> {
     _textController.clear();
     final textItem = _homeState.activeDeleteMode(index);
     if (textItem != null) {
-
-
-
-      Future.delayed(const Duration(milliseconds: 1000), () {
-
-
-        _homeState.deleteItem();
-
-
-      });
-
-
-
+      showModalBottomSheet(
+        backgroundColor: Theme.of(context).colorScheme.onSurface,
+        context: context,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(25),
+          ),
+        ),
+        builder: (context) {
+          return Components.bottomSheet(
+            height: 180,
+            onWillPop: () => _homeState.deselectMode(),
+            cancelAction: () => _homeState.deselectMode(),
+            confirmAction: () => _homeState.deleteItem(),
+            children: [
+              Text(
+                Languages.current.deletionConfirmationText,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.tertiary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                textItem["text"],
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.error,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          );
+        },
+      );
     }
   }
 
@@ -93,7 +113,7 @@ class _$PagesHomeState extends State<$PagesHome> {
 
                           return Components.textFormField(
                             controller: _textController,
-                            hintText: "Digite seu texto",
+                            hintText: Languages.current.enterYourText,
                             textAlign: TextAlign.center,
                             prefixSizeIcon: 14,
                             prefixIcon: (selectItem?["editMode"] == true)
