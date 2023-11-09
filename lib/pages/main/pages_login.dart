@@ -110,6 +110,7 @@ class _$PagesLoginState extends State<$PagesLogin> {
                           title: Languages.current.user,
                           prefixIcon: Assets.icons.userRounded,
                           prefixSizeIcon: 14,
+                          textInputAction: TextInputAction.next,
                           validator: _validatorUser,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(20),
@@ -124,6 +125,7 @@ class _$PagesLoginState extends State<$PagesLogin> {
                           prefixIcon: Assets.icons.lockRounded,
                           prefixSizeIcon: 18,
                           obscureText: true,
+                          textInputAction: TextInputAction.done,
                           validator: _validatorPass,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(20),
