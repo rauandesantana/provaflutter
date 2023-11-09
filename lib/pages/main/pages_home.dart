@@ -10,6 +10,7 @@ class $PagesHome extends StatefulWidget {
 class _$PagesHomeState extends State<$PagesHome> {
   late final ProvidersHomeState _homeState;
   final String _urlPrivacyPolicy = "https://google.com.br";
+  final _formKey = GlobalKey<FormState>();
   final _textController = TextEditingController();
   final _focusNode = FocusNode(
     canRequestFocus: true,
@@ -64,12 +65,24 @@ class _$PagesHomeState extends State<$PagesHome> {
 
   // --------------------------------------------------------------------------- Keyboard Action
   void _keyboardAction(bool editMode) {
-    if (editMode == true) {
-      _homeState.editItem(_textController.text);
-      _textController.clear();
+    final validate = _formKey.currentState?.validate();
+    if (validate == true) {
+      if (editMode == true) {
+        _homeState.editItem(_textController.text);
+        _textController.clear();
+      } else {
+        _homeState.addItem(_textController.text);
+        _textController.clear();
+      }
+    }
+  }
+
+  // --------------------------------------------------------------------------- Validator Text
+  String? _validatorText(String? text) {
+    if (text == null || text.isEmpty) {
+      return Languages.current.validatorIsEmpty;
     } else {
-      _homeState.addItem(_textController.text);
-      _textController.clear();
+      return null;
     }
   }
 
@@ -122,19 +135,24 @@ class _$PagesHomeState extends State<$PagesHome> {
                                 );
                               },
                             ),
-                            // ------------------------------------------------- Text Field
-                            Components.textFormField(
-                              controller: _textController,
-                              focusNode: _focusNode,
-                              hintText: Languages.current.enterYourText,
-                              textAlign: TextAlign.center,
-                              prefixSizeIcon: 14,
-                              prefixIcon: (selectEditMode == true)
-                                  ? Icons.edit_rounded
-                                  : null,
-                              keyboardAction: () {
-                                _keyboardAction(selectEditMode);
-                              },
+                            Form(
+                              key: _formKey,
+                              // ----------------------------------------------- Text Field
+                              child: Components.textFormField(
+                                controller: _textController,
+                                focusNode: _focusNode,
+                                hintText: Languages.current.enterYourText,
+                                textAlign: TextAlign.center,
+                                prefixSizeIcon: 14,
+                                validator: _validatorText,
+                                prefixIcon: (selectEditMode == true)
+                                    ? Icons.edit_rounded
+                                    : null,
+                                textInputAction: TextInputAction.send,
+                                keyboardAction: () {
+                                  _keyboardAction(selectEditMode);
+                                },
+                              ),
                             ),
                           ],
                         ),
